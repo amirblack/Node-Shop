@@ -1,0 +1,22 @@
+
+<div class="right">
+  <div class="row">
+                  <%- include(viewPath('layout/error')) %>
+
+            <form action="/admin/users/permissions/create" method="post" >
+                <div class="input-field col s12">
+                    <h5>نام اجازه</h5>
+                    <input type="text" name="name" id="name" placeholder="نام را وارد کنید" value="<%= old('name') %>">
+                </div>
+                <div class="input-field col s12">
+                    <h5>لیبل اجازه</h5>
+                    <input type="text" name="label" id="label" placeholder="لیبل را وارد کنید" value="<%= old('label') %>">
+                </div>
+                <div class="col s12 center" style="padding-top: 10px;">
+                <button type="submit" class="btn purple darken-3">
+                    ارسال!
+                </button>
+                </div>
+            </form>
+  </div>
+  </div>

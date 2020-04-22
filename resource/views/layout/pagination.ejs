@@ -1,0 +1,30 @@
+<div class="container">
+    <% if (pagination.totalPages > 1) { %>  
+        <ul class="pagination">  
+          <% if (pagination.page > 1) { %>
+              <li class="waves-effect"><a  href="?page=1">&laquo;</a></li>
+          <% } %>
+          <% var i = 1;
+          if (pagination.page > 5) {
+            i = +pagination.page - 4;
+          } %>
+          <% if (i !== 1) { %>
+              <li class="waves-effect disabled"><a  href="#">...</a></li>
+          <% } %>
+          <% for (i; i<=pagination.totalPages; i++) { %>
+            <% if (pagination.page == i) { %>
+                <li class="waves-effect active"><a  href="#"><span><%= i %></span></a></li>
+            <% } else { %>
+                <li class="waves-effect"><a  href="?page=<%= i %>"><%= i %></a></li>
+            <% } %>
+            <% if (i == (+pagination.page + 4)) { %>
+                <li class="waves-effect disabled"><a  href="#">...</a></li>
+            <% break; } %>
+          <% } %>
+          <% if (pagination.page != pagination.totalPages) { %>
+              <li class="waves-effect"><a  href="?page=<%= pagination.totalPages %>">&raquo;</a></li>
+          <% } %>
+        </ul>  
+    <% } %>  
+</div>
+      

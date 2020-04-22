@@ -1,0 +1,48 @@
+<div class="right">
+  <div class="row">
+    <div class="col s12">
+<h4>سطوح دسترسی</h4>
+<a class="btn green" href="/admin/users/roles/create">سطح جدید</a>
+<a class="btn pink" href="/admin/users/permissions">اجازه دسترسی ها</a>
+
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col s12">
+
+<div class="center">
+   
+    <div class="divider"></div>
+    <table class="highlight">
+        <thead>
+          <tr>
+              <th>نام</th>
+              <th>لیبل</th>
+              <th>تنظیمات</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% roles.docs.forEach(roles=>{ %>
+          <tr>
+            <td><%= roles.name %> </td>
+            <td><%= roles.label %></td>
+            <td>
+              <form action="/admin/users/roles/<%= roles.id %>?_method=DELETE" method="post">
+                <a href="/admin/users/roles/edit/<%= roles.id %>" class="btn blue">ویرایش</a>
+                <button type="submit" class="btn red ">حذف</button>
+              </form> 
+            </td>
+          </tr>
+         <%   }) %>
+
+        </tbody>
+      </table>
+      <%- include(viewPath('layout/pagination'),{pagination:roles}) %>
+      <%- include(viewPath('layout/sweetAlert')) %>
+</div>
+
+</div>
+</div>

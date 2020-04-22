@@ -1,0 +1,54 @@
+<div class="right">
+    <div class="row">
+          <div class="col s12">
+        <%- include(viewPath('layout/error')) %>
+        </div>
+        <form action="/admin/single-pages/edit/<%= single.id %>?_method=put" method="post" enctype="multipart/form-data">
+            <div class="input-field col s12">
+                <h5>تیتر</h5>
+                <input type="text" name="title" id="title" placeholder="تیتر را وارد کنید" value="<%= single.title %>">
+            </div>
+            <div class="input-field col s12">
+                <h5>اسلاگ</h5>
+                <input type="text" name="slug" id="slug" placeholder="اسلاگ را  به انگلیسی وارد کنید" value="<%= single.slug %>">
+            </div>
+            <div class="col s12">
+                <h5>متن</h5>
+                <textarea id="body" name="body" placeholder="متن را وارد کنید"><%= single.body %></textarea>
+            </div>
+             <div class="col s12">
+                    <h5>تصاویر</h5>
+                    <div class="file-field input-field">
+                        <div class="btn purple darken-3">
+                            <span>File</span>
+                            <input type="file" name="images">
+                        </div>
+                        <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" value="<%= single.images %>" placeholder="تنها یک تصویر از پوشه single می توانید انتخاب کنید!">
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+            <div class="col s12">
+                            <label>
+                                <input type="radio" name="imagesThumb" value="<%= single.images %>" checked="">
+                                <a href="<%= single.images %>" target="_blank"><img src="<%= single.images %>" width="100%"></a>
+                            </label>
+                        </div>
+                </div>
+            <div class="col s12 center" style="padding-top: 10px;">
+                <button type="submit" class="btn purple darken-3">
+                    ارسال!
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script src="/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('body', {
+        filebrowserUploadUrl: '/admin/ckupload-image',
+    });
+</script>

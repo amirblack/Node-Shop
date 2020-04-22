@@ -1,0 +1,289 @@
+body {
+    font-family: 'Vazir' , Vazir , Tahoma , Arial ,sans-serif !important;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 25px;
+    height: 100%;
+    text-align: justify !important;
+    text-transform: initial;
+    background-color: white;
+}
+
+blockquote{
+  font-size: .900em;
+  width:100%;
+  margin:50px auto;
+    font-family: 'Vazir' , Vazir , Tahoma , Arial ,sans-serif !important;
+  color: #555555;
+  padding:1.2em 30px 1.2em 75px;
+  border-left:8px solid #343A40 ;
+  line-height:1.6;
+  position: relative;
+  background:#EDEDED;
+}
+
+blockquote::before{
+    font-family: 'Vazir' , Vazir , Tahoma , Arial ,sans-serif !important;
+  content: "\201C";
+  color:#343A40;
+  font-size:4em;
+  position: absolute;
+  left: 10px;
+  top:-10px;
+}
+.responsive{
+  width: 100%;
+  height:auto;
+}
+
+blockquote::after{
+  content: '';
+}
+
+.parallax-container {
+    height: 570px;
+}
+.padding-right-5{
+  padding-right: 5px;
+}
+.height-important{
+  height: 30% !important;
+}
+.padding-top-5{
+  padding-top: 5px;
+}
+.left-important{
+  left: 50% !important;
+}
+.justify-text{
+  text-align: justify;
+}
+.shadow-category{
+  padding:5px;
+  width:50%;
+  border-radius: 10px;
+  background-color:rgba(0, 0,0, 0.7);
+}
+
+.card-category{
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  max-width:450px;
+  max-height:250px;
+}
+
+.card-tag{
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+  max-width: 450px;
+  max-height:300px;
+}
+@media only screen and (max-width : 992px){
+  .card-category{
+    max-height:150px !important;
+  }
+}
+.border-radius-10{
+  border-radius: 10px;
+}
+.swiper-mystyle{
+  border-radius:15px;
+  padding:10px;
+}
+.more-icon{
+  margin: 1.0933333333rem 0 .656rem 0;
+}
+
+body {
+  direction: rtl;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+span.badge {
+  margin-right: 14px;
+  margin-left: 0;
+  float: left;
+}
+
+span.badge.new:after {
+  content: " جدید";
+}
+
+.dropdown-content {
+  padding: 0;
+}
+
+.dropdown-content li {
+  text-align: right;
+}
+
+.collapsible-header i {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+
+.collapsible span.badge {
+  margin-right: auto;
+  margin-left: 0;
+}
+ul:not(.browser-default){
+  padding-right: 0;
+}
+.bodyman ul {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    list-style: none;
+}
+.bodyman ul li{
+  list-style-type: disc;
+}
+.dropdown-content li > a > i {
+  float: right;
+  margin: 0 0 0 24px;
+}
+
+.breadcrumb:before {
+  transform: rotateY(180deg);
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+  margin-right: 0;
+  margin-left: 24px;
+}
+
+.secondary-content {
+  float: left;
+}
+
+.collection.with-header .collection-item {
+  padding-left: 20px;
+}
+
+.collection .collection-item.avatar {
+  padding-left: 0;
+  padding-right: 72px;
+}
+
+.collection .collection-item.avatar .secondary-content {
+  left: 16px;
+  right: unset;
+}
+
+.collection .collection-item.avatar:not(.circle-clipper) > .circle, .collection .collection-item.avatar :not(.circle-clipper) > .circle {
+  right: 15px;
+  left: unset;
+}
+
+.row .col {
+  float: right;
+}
+
+.input-field .prefix ~ input, .input-field .prefix ~ textarea, .input-field .prefix ~ label, .input-field .prefix ~ .validate ~ label, .input-field .prefix ~ .helper-text, .input-field .prefix ~ .autocomplete-content {
+  margin-right: 3rem;
+  margin-left: 0;
+}
+
+.input-field .prefix{
+  text-align: right;
+}
+
+.input-field label, .input-field label:not(.label-icon).active {
+  -webkit-transform-origin: right!important;
+  transform-origin: right!important;
+}
+
+[type="checkbox"] + span:not(.lever) {
+  padding-left: 0;
+  padding-right: 35px;
+}
+
+[type="checkbox"] + span:not(.lever):before, [type="checkbox"]:not(.filled-in) + span:not(.lever):after {
+  right: 0;
+  left: unset;
+}
+
+[type="checkbox"].filled-in + span:not(.lever):before, [type="checkbox"].filled-in + span:not(.lever):after {
+  right: 0;
+  left: unset;
+}
+
+[type="checkbox"]:checked + span:not(.lever):before {
+  left: unset;
+  right: 10px;
+}
+
+.chip {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+[type="radio"]:not(:checked) + span, [type="radio"]:checked + span {
+    padding-left: 0;
+    padding-right: 35px;
+}
+
+[type="radio"] + span:before, [type="radio"] + span:after {
+    right: 0;
+    left: unset;
+}
+
+.input-field.col label {
+    right: 0.75rem;
+    left: unset;
+}
+
+.select-wrapper .caret {
+    right: unset;
+    left: 0;
+}
+.card-content-title{
+   font-size:16px !important;
+   margin:0px !important;
+   line-height:30px;
+}
+.card-content-h3{
+   font-size:15px !important;
+   margin:0px !important;
+   line-height:30px;
+}
+.caption-size{
+  line-height: 35px !important;
+}
+.card-content-h2{
+   font-size:20px !important;
+   margin:0px !important;
+   line-height:30px
+}
+.text-shadow{
+  width: 100%;
+  height: 100%;
+  text-shadow:2px 2px 3px #000000;
+}
+
+  .shadow-back{
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+.max-width-1600 {
+    max-width: 1600px;
+}
+.chip-color{
+    color:rgba(0,0,0,0.6);
+}
+.padding-5{
+  padding:5px;
+  
+}
+.height-450{
+  height: 450px;
+}

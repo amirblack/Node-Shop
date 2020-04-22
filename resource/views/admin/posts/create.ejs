@@ -1,0 +1,101 @@
+  <style>
+ .modal{
+     width:100% !important;
+     max-height: 100% !important;
+     overflow: visible;
+ }
+ </style>
+ <div class="right">
+  <div class="row">
+  <div class="col s12">
+        <%- include(viewPath('layout/error')) %>
+        </div>
+
+            <form action="/admin/posts/create" method="post" enctype="multipart/form-data">           
+                <div class="col s12">
+                    <h5>تیتر</h5>
+                    <input type="text" name="title" placeholder="تیتر را وارد کنید" value="<%= old('title') %>">
+                </div>
+                <div class="col s12">
+                    <h5>اسلاگ</h5>
+                    <input type="text" name="slug" placeholder="اسلاگ را وارد کنید" value="<%= old('slug') %>">
+                </div>
+                <div class="col s12">
+                    <h5>متن</h5>
+                    <textarea id="body"  name="body" placeholder="متن را وارد کنید"><%= old('body') %></textarea>
+                </div>
+                
+                <div class="col s12">
+                    <h5>تصاویر</h5>
+                    <div class="file-field input-field">
+                        <div class="btn purple darken-3">
+                            <span>File</span>
+                            <input type="file" name="images" >
+                        </div>
+                        <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="می توانید یک تصویر را وارد کنید">
+                        </div>
+                    </div>
+                </div>
+                  <div class="input-field col s12">
+                      <h5>وضعیت</h5>
+                    <select name="type" id="select">
+                    <option value="none" disabled selected >انتخاب کنید</option>
+                    <option value="true">آماده شده</option>
+                    <option value="false" >هنوز آماده نشده</option>
+                    </select>
+                </div>
+                <div class="input-field col s12">
+                      <h5>دسته بندی</h5>
+                    <select name="categories" id="selectCate">
+                    <option value="" disabled selected >انتخاب کنید</option>
+                    <% categories.forEach(cate=>{ %>
+                    <option value="<%= cate.id %>"><%= old('categories' ,cate.name) %></option>
+                     <%}) %>
+                    </select>
+                </div>
+                <div class="input-field col s12">
+                      <h5>زبان مربوطه</h5>
+                    <select name="lang" id="select">
+                    <option value="fa">فارسی</option>
+                     <option value="en">انگلیسی</option>
+                    </select>
+                </div>
+                <div class="input field col s12">
+                    <h5>تاریخ ارسال</h5>
+                    <input type="text" name="datepicker" class="datepicker" value="<%= old('datepicker') %>">
+                </div>
+                <div class="input field col s12">
+                    <h5>زمان ارسال</h5>
+                    <input type="text" name="timepicker" class="timepicker" value="<%= old('timepicker') %>">
+                </div>        
+                <div class="col s6">
+                    <h5>نام منبع</h5>
+                    <input type="text"  name="sourcename" placeholder="نام منبع را وارد کنید" value="<%= old('sourcename') %>">
+                </div>
+                <div class="col s6">
+                    <h5>لینک منبع</h5>
+                    <input type="text"  name="sourcelink" placeholder="لینک منبع را وارد کنید" value="<%= old('sourcelink') %>">
+                </div>
+                <div class="col s12">
+                    <h5>تگ ها</h5>
+                    <input type="text"  name="tags" placeholder="تگ ها را وارد کنید" value="<%= old('tags') %>">
+                </div>
+         
+                <div class="col s12 center" style="padding-top: 10px;">
+                <button type="submit" class="btn purple darken-3">
+                    ارسال!
+                </button>
+                </div>
+            </form>
+
+
+    </div>
+    </div>
+    
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script>
+CKEDITOR.replace( 'body',{
+    filebrowserUploadUrl:'/admin/ckupload-image',});
+
+</script>

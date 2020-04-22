@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/css/tag.css">
+<link rel="stylesheet" href="/css/stickyfooter.css">
+<div class="container">
+    <div class="row">
+        <div class="col xl2 l2">
+            <div class="section hide">
+            </div>
+        </div>
+        <div class="col  l8 s12">
+            <div class="center padding-top-5">
+                <div class="chip">
+                    <a href="/tags/<%= name %>" class="chip-color" rel="follow">
+                    #<%= name %>
+                    </a>
+                </div>
+                </div>
+    <div class="col s12">
+            <% if(tags.docs.length > 0 ){ %>
+            <% tags.docs.forEach(tag=>{ %>
+            <% if(dateEng(tag.timepost).format() <= dateEng().format()){ %>
+    <div class="col s12 l6 xl6 m6">
+          <div class="card medium">
+          <div class="card-image">
+          <img src="<%= tag.images %>" class="hoverable card-tag" alt="<%= tag.title %>">
+            <a href="<%= tag.path() %>" rel="follow" >
+            <span class="card-title text-shadow shadow-back card-content-title" ><%= tag.title %></span>
+            </a>
+          </div>
+          <div class="card-content">
+            <h3 class="card-content-h3">
+          <%- tag.body.substring(0,90)+'...' %>
+          </h3>
+          </div>
+          <div class="card-action center">
+            <a href="<%= tag.path() %>" rel="follow" class="purple-text  text-darken-3">ادامه مطلب</a>
+          </div>
+        </div>
+       
+          </div>
+        
+        <% } %>
+        <% }) %>
+        </div>
+         <div class="center">
+                <%- include(viewPath('layout/pagination'),{pagination:tags}) %>
+            </div>
+        <% } else { %>
+            <p class="center">چیزی وجود ندارد.</p>
+        <%  } %>
+            
+        
+        </div>
+        <div class="col xl2 l2">
+            <div class="section hide">
+            </div>
+        </div>
+    </div>
+</div>
+
+

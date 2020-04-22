@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="/css/public.css">
+    <link href='https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="<%= config.websiteurl %>">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-chrome-192x192.png">
+    <link rel="manifest" href="/images/icons/manifest.json">
+    <link rel="mask-icon" href="/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link type="text/css" rel="stylesheet" href="/css/padding.css" media="screen,projection" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>    <title><%= title ||  brandname %></title>
+    <%- style %>
+</head>
+<body>
+      <nav>
+    <div class="nav-wrapper purple darken-3">
+            <a href="/admin" class="brand-logo center "><%= adminDash %></a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <!-- <li><a href="" class="dropdown-trigger" data-target="dropdown1">Category</a></li> -->
+
+      </ul>
+      
+          <a href="#!" data-target="mobile-demo" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
+      
+      <ul class="sidenav " id="mobile-demo">
+     
+      
+    
+      <%  if(auth.check && useruse.myroles[0].label == 'site-manager') { %>
+            <li>
+                <a href="/admin/posts" class="black-text">
+                    <i class="material-icons">
+                        border_color
+                    </i>
+                    پست ها
+                </a>
+            </li>
+            <li>
+                <a href="/admin/categories" class="black-text">
+                    <i class="material-icons">
+                        create
+                    </i>
+                    دسته بندی ها
+                </a>
+            </li>
+            <li>
+                <a href="/admin/comments" class="black-text">
+                    <i class="material-icons">
+                        comment
+                    </i>
+                    نظرات
+                </a>
+            </li>
+             <li>
+                <a href="/admin/users" class="black-text">
+                    <i class="material-icons">
+                        person_outline
+                    </i>
+                    کاربران
+                </a>
+            </li>
+            
+             <li>
+                <a href="/admin/analyse" class="black-text">
+                    <i class="material-icons">
+                        assessment
+                    </i>
+                    آمار
+                </a>
+            </li>
+            <li>
+                <a href="/admin/single-pages" class="black-text">
+                    <i class="material-icons">
+                        check
+                    </i>
+                    تک صفحات
+                </a>
+            </li>
+        <% } else if(auth.check && useruse.myroles[0].label == 'author'){ %> 
+            <li>
+                <a href="/admin/posts" class="black-text">
+                    <i class="material-icons">
+                        border_color
+                    </i>
+                    پست ها
+                </a>
+            </li>
+        <% } else if(auth.check && useruse.myroles[1].label == 'comment-manager'){ %>
+            <li>
+                <a href="/admin/comments" class="black-text">
+                    <i class="material-icons">
+                        comment
+                    </i>
+                    نظرات
+                </a>
+            </li>
+        <% } %>
+         <li><a href="/" class="black-text">
+          <i class="material-icons">
+              home
+          </i>
+          صفحه اصلی 
+          </a>
+        </li>
+          <li><a href="/exit" class="black-text">
+          <i class="material-icons">
+              exit_to_app
+          </i>
+          خروج</a></li>
+
+      </ul>
+ 
+    </div>
+  </nav>
+<ul class="sidenav sidenav-fixed" id="sidedash">
+   
+    <% if(auth.check && useruse.myroles[0].label == 'site-manager'){ %>
+    
+        <li>
+            <a href="/admin/posts" class="black-text">
+                    <i class="material-icons">
+                        border_color
+                    </i>
+                    پست ها
+                </a>
+            </li>
+            <li>
+                <a href="/admin/categories" class="black-text">
+                    <i class="material-icons">
+                        create
+                    </i>
+                    دسته بندی ها
+                </a>
+            </li>
+            <li>
+                <a href="/admin/comments" class="black-text">
+                    <i class="material-icons">
+                        comment
+                    </i>
+                    نظرات
+                </a>
+            </li>
+             <li>
+                <a href="/admin/users" class="black-text">
+                    <i class="material-icons">
+                        person_outline
+                    </i>
+                    کاربران
+                </a>
+            </li>
+            
+             <li>
+                <a href="/admin/analyse" class="black-text">
+                    <i class="material-icons">
+                        assessment
+                    </i>
+                    آمار
+                </a>
+            </li>
+            <li>
+                <a href="/admin/single-pages" class="black-text">
+                    <i class="material-icons">
+                        check
+                    </i>
+                    تک صفحات
+                </a>
+            </li>
+
+            <% } else if(auth.check && useruse.myroles[0].label == 'author'){ %> 
+
+                <li>
+                <a href="/admin/posts" class="black-text">
+                    <i class="material-icons">
+                        border_color
+                    </i>
+                    پست ها
+                </a>
+            </li>
+            <% if(useruse.myroles[1]){ %>
+            <% if(auth.check && useruse.myroles[1].label == 'comment-manager'){ %>
+            <li>
+                <a href="/admin/comments" class="black-text">
+                    <i class="material-icons">
+                        comment
+                    </i>
+                    نظرات
+                </a>
+            </li>
+            <% } %>
+            <% } %>
+            <% } else if(auth.check && useruse.myroles[0].label == 'comment-manager'){ %>
+            <li>
+                <a href="/admin/comments" class="black-text">
+                    <i class="material-icons">
+                        comment
+                    </i>
+                    نظرات
+                </a>
+            </li>
+            <% if(useruse.myroles[1]){ %>
+            <% if(auth.check && useruse.myroles[1].label == 'author'){%>
+            
+                <li>
+                <a href="/admin/posts" class="black-text">
+                    <i class="material-icons">
+                        border_color
+                    </i>
+                    پست ها
+                </a>
+            </li>
+            <% } %>
+            <% } %>
+            <% } %>
+             <li><a href="/" class="black-text">
+          <i class="material-icons">
+              home
+          </i>
+          صفحه اصلی 
+          </a>
+        </li>
+          <li><a href="/exit" class="black-text">
+          <i class="material-icons">
+              exit_to_app
+          </i>
+          خروج
+          </a></li>
+        
+</ul>
+<%- body %>
+
+  <script src="/js/jquery-3.4.1.min.js">
+    </script>
+    <script src="/js/materialize.min.js">
+    </script>
+  <%- script %>
+    <script >
+    $(document).ready(function(){
+        $('.dropdown-trigger').dropdown();
+        $('.sidenav').sidenav({
+            edge:'right'
+        });
+        $('#select').formSelect();
+        $('#selectCate').formSelect()
+        $('#select:not([multiple])').formSelect();
+        $('.datepicker').datepicker({
+            i18n:{
+   monthsFull: [ 'ژانویه', 'فوریه', 'مارس', 'آوریل', 'مه', 'ژوئن', 'ژوئیه', 'اوت', 'سپتامبر', 'اکتبر', 'نوامبر', 'دسامبر'],
+    monthsShort: [ 'ژانویه', 'فوریه', 'مارس', 'آوریل', 'مه', 'ژوئن', 'ژوئیه', 'اوت', 'سپتامبر', 'اکتبر', 'نوامبر', 'دسامبر' ],
+    weekdays: [ 'یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه' ],
+    weekdaysShort: [ 'یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه' ],
+    today: 'امروز',
+    cancel: 'بستن',
+    done: 'انتخاب',
+    format: 'yyyy mmmm dd',
+    formatSubmit: 'yyyy/mm/dd',
+    labelMonthNext: 'ماه بعدی',
+	labelMonthPrev: 'ماه قبلی'
+            },
+            format:'yyyy-mm-dd'});
+        $('.timepicker').timepicker({twelveHour:false,i18n:{
+            cancel:'بستن',
+            done:'انتخاب',
+        }})
+    });
+    </script>
+  
+</body>
+</html>

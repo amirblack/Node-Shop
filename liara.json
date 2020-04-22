@@ -1,0 +1,14 @@
+{
+    "port":3000,
+    "node":{
+        "npmAudit": true,
+        "version":"12"
+    },
+    "healthCheck": {
+    "command": "curl --fail http://localhost:3000 || exit 1",
+    "interval": 20,
+    "timeout": 15,
+    "retries": 2,
+    "startPeriod": 5
+  }
+}

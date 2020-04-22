@@ -1,0 +1,61 @@
+<div class="parallax-container valign-wrapper">
+    <div class="row shadow-category">
+    <div class="col s12">
+<div class="center" >
+        <h4 class="white-text"><%= categoryfinder.name %></h4>
+    </div>
+    </div>
+    
+    </div>
+    <div class="parallax">
+        <img src="<%= categoryfinder.images %>" class="max-width-1600"  alt="<%= categoryfinder.name %>">
+    </div>
+</div>
+    <div class="row">
+<div class="container">
+        <div class="col l2 hide-on-med-and-down "><div class="card-panel hide"></div></div>
+        <div class="col l8 s12">
+            <div class="center">
+                <p>آخرین پست ها در <a href="/categories/<%= categoryfinder.slug %>" rel="follow"><%= categoryfinder.name %></a></p>
+            </div>
+          <div class="col s12">
+        <% if(category.docs.length > 0){ %>
+        <% category.docs.forEach(cate=>{ %> 
+        <% if(dateEng(cate.timepost).format() <= dateEng().format()){ %>
+        <div class="col s12 l6 m6 xl6">
+          <div class="card medium">
+          <div class="card-image">
+          <img src="<%= cate.images %>" alt="<%= cate.title %>">
+            <a href="<%= cate.path() %>" rel="follow" >
+            <span class="card-title text-shadow shadow-back card-content-title" ><%= cate.title %></span>
+            </a>
+          </div>
+          <div class="card-content">
+            <h3 class="card-content-h3">
+          <%- cate.body.substring(0,90)+'...' %>
+          </h3>
+          </div>
+          <div class="card-action center">
+            <a href="<%= cate.path() %>" rel="follow" class="purple-text  text-darken-3">ادامه مطلب</a>
+          </div>
+        </div>
+        </div>
+        <% }else if(! dateEng(cate.timepost).format() <= dateEng().format() && category.docs.length < 0 )  { %>
+        <div class="center">
+        <p>متاسفانه موردی یافت نشد!</p>
+        </div>
+        <% } %>
+        <% }) %>
+        </div>
+        <div class="center">
+<%- include(viewPath('layout/pagination'),{pagination:category}) %>
+        </div>
+         <% } else { %>
+        <div class="center">
+        <p>متاسفانه موردی یافت نشد!</p>
+        </div>
+         <% } %>
+        </div>
+        <div class="col l2 hide-on-med-and-down"><div class="card-panel hide"></div></div>
+    </div>
+</div>

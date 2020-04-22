@@ -1,0 +1,106 @@
+  <style>
+ .modal{
+     width:100% !important;
+     max-height: 100% !important;
+     overflow: visible;
+ }
+ </style>
+ <div class="right">
+  <div class="row">
+  <div class="col s12">
+        <%- include(viewPath('layout/error')) %>
+        </div>
+
+            <form action="/admin/posts/edit/<%= posts.id %>?_method=put" method="post" enctype="multipart/form-data">      
+                <div class="col s12">
+                    <h5>تیتر</h5>
+                    <input type="text" name="title" placeholder="تیتر را وارد کنید" value="<%=  posts.title %>">
+                </div>
+                <div class="col s12">
+                    <h5>اسلاگ</h5>
+                    <input type="text" name="slug" placeholder="اسلاگ را وارد کنید" value="<%=  posts.slug %>">
+                </div>
+                <div class="col s12">
+                    <h5>متن</h5>
+                    <textarea id="body"  name="body" placeholder="متن پست را وارد کنید"><%- posts.body %></textarea>
+                </div>
+                
+                <div class="col s12">
+                    <h5>تصاویر</h5>
+                    <div class="file-field input-field">
+                        <div class="btn purple darken-3">
+                            <span>File</span>
+                            <input type="file" name="images" multiple>
+                        </div>
+                        <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="می توانید یک یا چند تصویر را وارد کنید">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+            <div class="col s6 offset-s6">
+                        <input type="radio" name="imagesThumb" value="<%= posts.images %>" checked="">
+                        <a href="<%= posts.images %>" target="_blank"><img src="<%= posts.images %>" width="100%"></a>
+                        </div>
+                </div>
+                  <div class="input-field col s12">
+                      <h5>وضعیت</h5>
+                    <select name="type" id="select">
+                    <option value="" disabled selected >انتخاب کنید</option>
+                    <option value="true" <%- posts.type === true ? 'selected' :'' %>>آماده شده</option>
+                    <option value="false" <%- posts.type === false ? 'selected' : '' %> >هنوز آماده نشده</option>
+                    </select>
+                </div>
+                 <div class="input-field col s12">
+                      <h5>دسته بندی ها</h5>
+                    <select name="categories" id="selectCate" >
+                    <option value="" disabled selected >انتخاب کنید</option>
+                    <% categories.forEach(cate=>{ %>
+                    <option value="<%= cate.id %>" <%- posts.categories == cate.id ? 'selected' : '' %>><%= cate.name %></option>
+                     <%}) %>
+                    </select>
+                </div>
+                 <div class="input-field col s12">
+                      <h5>زبان مربوطه</h5>
+                    <select name="lang" id="select">
+                    <option value="fa" <%= posts.lang == 'fa' ? 'selected' : '' %>>فارسی</option>
+                    <option value="en" <%= posts.lang == 'en' ? 'selected' : '' %>>انگلیسی</option>
+                    </select>
+                </div>
+         
+                <div class="input field col s12">
+                    <h5>تاریخ ارسال</h5>
+                    <input type="text" name="datepicker" class="datepicker" value="<%= dateEng(posts.timepost).format('YYYY-MM-DD') %>">
+                </div>
+                <div class="input field col s12">
+                    <h5>تاریخ ساعت</h5>
+                    <input type="text" name="timepicker" class="timepicker" value="<%= date(posts.timepost).locale('en').format('HH:mm') %>">
+                </div>  
+                <div class="col s12 l6 ">
+                    <h5>نام منبع</h5>
+                    <input type="text" value="<%= posts.sourcename %>" name="sourcename" placeholder="نام منبع را وارد کنید">
+                </div>
+                <div class="col s12 l6">
+                    <h5>لینک منبع</h5>
+                    <input type="text" value="<%= posts.sourcelink %>" name="sourcelink" placeholder="لینک منبع را وارد کنید">
+                </div>
+                <div class="col s12">
+                    <h5>تگ ها</h5>
+                    <input type="text" value="<%= posts.tags %>" name="tags" placeholder="تگ ها را وارد کنید">
+                </div>
+                <div class="col s12 center" style="padding-top: 10px;">
+                <button type="submit" class="btn purple darken-3">
+                    ویرایش!
+                </button>
+                </div>
+            </form>
+
+
+    </div>
+    </div>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script>
+CKEDITOR.replace( 'body',{
+    filebrowserUploadUrl:'/admin/ckupload-image',});
+
+</script>

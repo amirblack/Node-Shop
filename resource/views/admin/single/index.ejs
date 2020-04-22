@@ -1,0 +1,46 @@
+<div class="right">
+  <div class="row">
+    <div class="col s12">
+<h4>تک صفحات</h4>
+<a class="btn green" href="/admin/single-pages/create">صفحه جدید</a>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col s12">
+
+<div class="center">
+   
+    <div class="divider"></div>
+    <table class="highlight">
+        <thead>
+          <tr>
+              <th>نام</th>
+              <th>تاریخ</th>
+              <th>تنظیمات</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% single.docs.forEach(sing=>{ %>
+          <tr>
+            <td><%= sing.title %> </td>
+            <td><%= date(sing.createdAt).fromNow() %></td>
+            <td>
+              <form action="/admin/single-pages/<%= sing.id %>?_method=DELETE" method="post">
+                <a href="/admin/single-pages/edit/<%= sing.id %>" class="btn blue">ویرایش</a>
+                <button type="submit" class="btn red ">حذف</button>
+              </form> 
+            </td>
+          </tr>
+         <%   }) %>
+
+        </tbody>
+      </table>
+      <%- include(viewPath('layout/pagination'),{pagination:single}) %>
+      <%- include(viewPath('layout/sweetAlert')) %>
+</div>
+
+</div>
+</div>

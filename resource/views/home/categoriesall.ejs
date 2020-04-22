@@ -1,0 +1,32 @@
+    <div class="row">
+<div class="container">
+        <div class="col l3 hide-on-med-and-down "><div class="card-panel hide"></div></div>
+         
+        <div class="col s12 l6">
+            <div class="masonry-wrapper">
+               <div class="masonry">
+        <% if(categories.length > 0){ %>
+            <% categories.forEach(cate=>{ %> 
+    
+                   <div class="masonry-item responsive">
+                        <img src="<%= cate.images %>"   alt="<%= cate.name  %>" class="masonry-content">
+                        <a class="centered" href="<%= cate.path() %>">
+                        <h2 class="text-shadow card-content-h2">
+                        <%= cate.name %>
+                        </h2>
+                        </a>
+                        </div>
+            
+             
+      
+        <% }) %>
+        <% } %>
+           </div>
+           </div>
+          </div>
+        <div class="col l3 hide-on-med-and-down"><div class="card-panel hide"></div></div>
+    </div>
+</div>
+<link rel="stylesheet" href="/css/categoriesall.css">
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.js"></script>

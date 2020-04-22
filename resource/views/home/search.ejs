@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="/css/stickyfooter.css">
+<main>
+<div class="container">
+    <div class="row ">
+        <% let {search } = req.query %>
+        <div class="center">
+            <h5>نتایج جستجو برای "<%= search %>"</h5>
+        </div>
+        <div class="col l4 hide-on-med-and-down">
+            <div class="card-panel hide">
+            </div>
+        </div>
+        <div class="col s12 l4">
+            <% posts.forEach(post=>{ %>
+            <% if(dateEng(post.timepost).format() <= dateEng().format()){ %>
+    <div class="col s12 ">
+          <div class="card medium">
+          <div class="card-image">
+          <img src="<%= post.images %>" width="720px"  alt="<%= post.title %>">
+            <a href="<%= post.path() %>" rel="follow" >
+            <span class="card-title text-shadow shadow-back card-content-title" ><%= post.title %></span>
+            </a>
+          </div>
+          <div class="card-content">
+            <h3 class="card-content-h3">
+          <%- post.body.substring(0,90)+'...' %>
+          </h3>
+          </div>
+          <div class="card-action center">
+            <a href="<%= post.path() %>" rel="follow" class="purple-text  text-darken-3">ادامه مطلب</a>
+          </div>
+        </div>
+        </div>
+            <% } else  { %>
+            <div class="center">
+                <h5>متاسفانه موردی یافت نشد!</h5>
+            </div>
+            <% } %>
+            <% }) %>
+            <% if(! posts.length > 0){ %>
+            <div class="center">
+            <h5>متاسفانه موردی یافت نشد!</h5>
+            </div>
+            <% } %>
+        </div>
+        <div class="col l4 hide-on-med-and-down">
+            <div class="card-panel hide"></div>
+        </div>
+    </div>
+</div>
+</div></main>
+<script>
+    $(document).ready(function () {
+        $('select').formSelect()
+    })
+</script>

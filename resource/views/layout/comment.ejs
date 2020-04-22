@@ -1,0 +1,103 @@
+            <div class="row">
+              <div class="row col s12">
+                <h5 class="center">ارسال نظر</h5>
+                <form action="/posts/comment" method="post">
+                  <input type="hidden" name="_csrf" value="<%= req.csrfToken() %>">
+                  <input type="hidden" name="post" value="<%= subject.id %>">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea name="comment" placeholder="متن"  class="materialize-textarea"></textarea>
+                    </div>
+                  </div>
+                  <% if(! auth.check){ %>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="name" name="name" type="text" class="validate">
+                      <label for="name">نام تان را وارد کنید</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="email" name="email" type="email" class="validate">
+                      <label for="email">ایمیل را وارد کنید</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <%- recap %>
+                    </div>
+                  </div>
+                  <% } %>
+                  <div class="center">
+                    <button type="submit" class="btn  purple darken-3">ارسال!</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <% comments.forEach(comment=>{ %>
+            <div class="card-panel border-radius-20" >
+              <div class="section">
+                
+                <h6><img src="/images/user-black.png" alt="user" class="circlecomment"><%= comment.name %></h6>
+                <p class="author-color "><%= date(comment.createdAt).fromNow() %></p>
+                <p><%= comment.comment %><button data-target="modal1"
+                    class="btn modal-trigger  hide-on-med-and-down modal-answer margin-right-10"
+                    data-parent="<%= comment.id %>">پاسخ</button></p>
+                <button data-target="modal1" data-parent="<%= comment.id %>"
+                  class="btn modal-trigger  hide-on-large-only modal-answer">پاسخ</button>
+              </div>
+              <% if(comment.commentsParent.length > 0){ %>
+              <% comment.commentsParent.forEach(comment=>{ %>
+              <div class="section answer-comment">
+                <h6><img src="/images/user-black.png" alt="user" class="circlecomment"><%= comment.name %></h6>
+                  <p class="author-color "><%= date(comment.createdAt).fromNow() %></p>
+                <p><%= comment.comment %> </p>
+                
+              </div>
+              <% }) %>
+              <% } %>
+            </div>
+
+
+            <% }) %>
+
+
+
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+              <div class="modal-content">
+                <h4 class="center">ارسال پاسخ</h4>
+                <form action="/posts/comment" method="post">
+                  <input type="hidden" name="_csrf" value="<%= req.csrfToken() %>">
+                  <input type="hidden" name="parent" id="parentMe" value="">
+                  <input type="hidden" name="<%= subject.constructor.modelName.toLowerCase() %>"
+                    value="<%= subject.id %>">
+                  <div class="input-field col s12">
+                    <textarea name="comment" placeholder="متن" id="textarea" class="materialize-textarea"></textarea>
+                  </div>
+                  <% if(! auth.check){ %>
+                  <div class="input-field col s12">
+                    <input name="name" type="text" class="validate">
+                    <label for="name">نام تان را وارد کنید</label>
+                  </div>
+                  <div class="input-field col s12">
+                    <input name="email" type="email" class="validate">
+                    <label for="email">ایمیل را وارد کنید</label>
+                  </div>
+                  <div class="input-field col s12">
+                    <%- recap %>
+                  </div>
+                  <% } %>
+
+                  <div class="center">
+                    <button type="submit" class="btn  purple darken-3">ارسال</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <script>
+              $(document).ready(function () {
+                $('.modal').modal()
+                $(document).on('click', '.modal-answer', function (event) {
+                  let parentId = ($(this).data("parent"))
+                  $("#modal1").find("[id='parentMe']").val(parentId)
+                });
+              })
+            </script>

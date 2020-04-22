@@ -1,0 +1,56 @@
+<div class="right">
+    <div class="row">
+        <div class="col s12">
+            <%- include(viewPath('layout/error')) %>
+        </div>
+
+        <form action="/admin/categories/edit/<%= category.id %>?_method=put" method="post"
+            enctype="multipart/form-data">
+            <div class="input-field col s12">
+                <h5>نام دسته بندی</h5>
+                <input type="text" name="name" placeholder="نام دسته بندی را وارد کنید" value="<%= category.name %>">
+            </div>
+            <div class="input-field col s12">
+                <h5>اسلاگ دسته بندی جدید</h5>
+                <input type="text" name="slug" placeholder="نام  اسلاگ را وارد کنید" value="<%= category.slug %>">
+            </div>
+            <div class="input-field col s12">
+                <h5>دسته بندی مربوطه</h5>
+
+                <select name="parent" id="select">
+                    <option value="none">Dafault</option>
+                </select>
+            </div>
+            <div class="input-field col s12">
+                <h5>توضیح دسته بندی جدید</h5>
+                <input type="text" name="description" placeholder="توضیح دسته بندی را وارد کنید" value="<%= category.description %>">
+            </div>
+            <div class="col s12">
+                <h5>تصویر</h5>
+                <div class="file-field input-field">
+                    <div class="btn purple darken-3">
+                        <span>File</span>
+                        <input type="file" name="images">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text"
+                            placeholder="تنها یک تصویر می توانید انتخاب کنید">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <label>
+                        <input type="radio" name="imagesThumb" value="<%= category.images %>" checked="">
+                        <a href="<%= category.images %>" target="_blank"><img src="<%= category.images %>" class="responsive-img"></a>
+                    </label>
+                </div>
+            </div>
+            <div class="col s12 center" style="padding-top: 10px;">
+                <button type="submit" class="btn purple darken-3">
+                    ویرایش!
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

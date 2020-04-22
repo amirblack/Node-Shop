@@ -1,0 +1,32 @@
+
+<div class="right">
+  <div class="row">
+  <div class="col s12">
+        <%- include(viewPath('layout/error')) %>
+        </div>
+
+            <form action="/admin/users/roles/edit/<%= roles.id %>?_method=put" method="post" >
+                <div class="input-field col s12">
+                    <h5>نام دسترسی</h5>
+                    <input type="text" name="name" id="name" placeholder="Enter Your name" value="<%= old('name',roles.name) %>">
+                </div>
+                <div class="input-field col s12">
+                    <h5>لیبل دسترسی</h5>
+                    <input type="text" name="label" id="label" placeholder="Enter Your label" value="<%= old('label',roles.label) %>">
+                </div>
+                <div class="input-field col s12">
+                      <h5>دسته بندی</h5>
+                    <select name="permissions" id="select" multiple>
+                    <% permissions.forEach(perm=>{ %>
+                    <option value="<%= perm.id %>" <%- old('permissions',roles.permissions).indexOf(perm.id) !== -1 ? 'selected' : '' %>><%= perm.name %></option>
+                     <%}) %>
+                    </select>
+                </div>
+                <div class="col s12 center" style="padding-top: 10px;">
+                <button type="submit" class="btn purple darken-3">
+                    ویرایش!
+                </button>
+                </div>
+            </form>
+  </div>
+  </div>

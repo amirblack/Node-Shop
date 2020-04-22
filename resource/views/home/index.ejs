@@ -1,0 +1,154 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<!-- Slider -->
+<div class="slider">
+  <ul class="slides">
+    <% postslider.forEach(slider=>{ %>
+    <% if(dateEng(slider.timepost).format() <= dateEng().format()){ %>
+    <li>
+      <img src="<%= slider.images %>" width="720px" alt="<%= slider.title %>">
+      <div class="caption center-align captionStyle">
+        <h2 class="caption-size"><%= slider.title %>
+        </h2>
+        <a href="<%= slider.path() %>" class="btn waves-effect  purple darken-3 white-text">مطالعه می کنم!
+        </a>
+      </div>
+    </li>
+    <% } %>
+    <% }) %>
+  </ul>
+</div>
+<div class="row">
+  <div class="container">
+    <div class="row">
+      <div class="col m11 l11 s10  xl11">
+        <h5>آخرین مطالب</h5>
+      </div>
+      <div class="col l1 m1  s2 xl1">
+        <a href="/posts"><i class="material-icons more-icon">chevron_left</i></a>
+      </div>
+      <div class="col s12">
+        <div class="divider"></div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <% lastPosts.forEach(posts=>{ %>
+      <% if(dateEng(posts.timepost).format() <= dateEng().format()){ %>
+      <div class="col s12 l4 m6">
+        <div class="card medium">
+          <div class="card-image">
+            <img src="<%= posts.images %>" alt="<%= posts.title %>">
+            <a href="<%= posts.path() %>" rel="follow">
+              <span class="card-title text-shadow shadow-back card-content-title"><%= posts.title %></span>
+            </a>
+          </div>
+          <div class="card-content">
+            <h3 class="card-content-h3">
+              <%- posts.body.substring(0,90)+'...' %>
+            </h3>
+          </div>
+          <div class="card-action center">
+            <a href="<%= posts.path() %>" rel="follow" class="purple-text  text-darken-3">ادامه مطلب</a>
+          </div>
+        </div>
+      </div>
+
+      <% } %>
+      <%  }) %>
+    </div>
+  </div>
+</div>
+<% categories.forEach(cate=>{ %>
+<% if(cate.post.length > 0){ %>
+<div class="row">
+  <div class="container">
+    <div class="row">
+      <div class="col m11 l11 s10  xl11">
+        <a href="<%= cate.path() %>" class="black-text">
+          <h5><%= cate.name %></h5>
+        </a></div>
+      <div class="col l1 m1  s2 xl1">
+        <a href="<%= cate.path() %>"><i class="material-icons more-icon">chevron_left</i></a>
+      </div>
+      <div class="col s12">
+        <div class="divider"></div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <%  cate.post.forEach(posts=>{ %>
+      <% if(dateEng(posts.timepost).format() <= dateEng().format()){ %>
+      <div class="col s12 l4 m6">
+        <div class="card medium">
+          <div class="card-image">
+            <img src="<%= posts.images %>" alt="<%= posts.title %>">
+            <a href="<%= posts.path() %>" rel="follow">
+              <span class="card-title text-shadow shadow-back card-content-title"><%= posts.title %></span>
+            </a>
+          </div>
+          <div class="card-content">
+            <h3 class="card-content-h3">
+              <%- posts.body.substring(0,90)+'...' %>
+            </h3>
+          </div>
+          <div class="card-action center">
+            <a href="<%= posts.path() %>" rel="follow" class="purple-text  text-darken-3">ادامه مطلب</a>
+          </div>
+        </div>
+
+      </div>
+      <% } %> <% }) %>
+    </div>
+  </div>
+</div>
+<% } %>
+<% }) %>
+
+<% if( hotposts.length > 0 ){ %>
+<div class="masonry-wrapper">
+  <h5>پربازدیدترین ها</h5>
+  <div class="masonry">
+    <% hotposts.forEach(post=>{ %>
+    <% if(dateEng(post.timepost).format() <= dateEng().format()){ %>
+    <div class="masonry-item responsive">
+      <img src="<%= post.images %>" width="720px" height="420px" alt="<%= post.title %>" class="masonry-content blur">
+      <a class="centered" href="<%= post.path() %>">
+        <h2><span class="text-shadow card-content-h2">
+            <%= post.title %>
+          </span>
+        </h2>
+      </a>
+    </div>
+    <% } %>
+    <% }) %>
+  </div>
+</div>
+<% } %>
+<% if(mostComment.length > 0){ %>
+<div class="masonry-wrapper">
+  <h5>پربحث ترین ها</h5>
+  <div class="masonry">
+    <% mostComment.forEach(post=>{ %>
+    <% if(dateEng(post.timepost).format() <= dateEng().format()){ %>
+    <div class="masonry-item responsive">
+      <img src="<%= post.images %>" width="720px" height="420px" alt="<%= post.title %>" class="masonry-content blur">
+      <a class="centered" href="<%= post.path() %>">
+        <h2 class="text-shadow card-content-h2">
+          <%= post.title %>
+        </h2>
+      </a>
+    </div>
+    <% } %>
+    <% }) %>
+  </div>
+</div>
+<% } %>
+<%- include(viewPath('layout/sweetAlert')) %>
+<script src="/js/jquerySlider.js"></script>
+<script src="/js/imagesloaded.pkgd.min.js"></script>
+<script src="/js/masonry.js"></script>

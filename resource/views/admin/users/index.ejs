@@ -1,0 +1,75 @@
+<div class="right">
+  <div class="row">
+    <div class="col s12">
+<h4>کاربران</h4>
+<a href="/admin/users/create" class="btn blue"  >ساخت کاربر جدید</a>
+<a href="/admin/users/roles" class="btn pink">سطوح دسترسی</a>
+
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col s12">
+
+<div class="center">
+   
+    <div class="divider"></div>
+    <table class="responsive-table">
+        <thead>
+          <tr>
+              <th>نام کاربر-ایمیل</th>
+              <th>تاریخ ثبت نام</th>
+              <th>نوع کاربر</th>
+              <th>تنظیمات</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% users.docs.forEach(user=>{ %>
+
+          <tr>
+            <td><%= user.name+"-"+user.email %> </td>
+            <td><%= date(user.createdAt).fromNow() %></td>
+            <% if(user.admin && user.roles.length > 0){ %>
+            <td>
+              <%= user.roles[0].name %>
+            </td>
+            <% } else { %>
+            <td>
+              عادی
+            </td>
+            <% } %>
+            <td>
+              <form action="/admin/users/<%= user.id %>?_method=DELETE" method="post">
+              <!-- Switch -->
+              
+
+                <a href="/admin/users/toggleadmin/<%= user.id %>" class="btn amber"><%= user.admin ? 'کنسل کردن ادمین' : 'ادمین شود' %></a>
+              <% if(user.admin){ %>
+                  <a href="/admin/users/<%= user.id %>/addrole" class="btn green">دسترسی دادن</a>
+              <%  } %>
+                <button type="submit" class="btn red ">حذف</button>
+              </form> 
+                <div class="switch">
+        
+                  <label>
+                     فعال
+                    <input disabled type="checkbox" <%= user.admin ? 'checked':'' %>>
+                    <span class="lever"></span>
+                    غیر فعال
+                  </label>
+                </div>
+
+            </td>
+          </tr>
+         <%   }) %>
+
+        </tbody>
+      </table>
+      <%- include(viewPath('layout/pagination'),{pagination:users}) %>
+      <%- include(viewPath('layout/sweetAlert')) %>
+</div>
+
+</div>
+</div>

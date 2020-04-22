@@ -1,0 +1,140 @@
+ <!DOCTYPE html>
+ <html lang="fa">
+
+ <head>
+   <meta charset="UTF-8">
+   <title><%- defineContent('title')  || posts.title || brandname%></title>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+   <link rel="stylesheet" href="/css/public.css">
+   <link rel="stylesheet" href="/css/auth.css">
+   <link rel="canonical" href="<%= config.websiteurl+req.url %>">
+   <meta name="description" content=" صفحه ورود | ثبت نام در <%= brandname %>">
+   <meta name="robots" content="index, follow">
+   <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+   <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-chrome-192x192.png">
+   <link rel="manifest" href="/images/icons/manifest.json">
+   <link rel="mask-icon" href="/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+   <meta name="msapplication-TileColor" content="#da532c">
+   <meta name="theme-color" content="#ffffff">
+   <meta property="og:locale" content="fa_IR" /><% if(req.url == '/'){ %>
+   <meta property="og:type" content="website" /><% } else if(req.url=='/post'){ %>
+   <meta property="og:type" content="article" /><% } else { %>
+   <meta property="og:type" content="panel" /><% } %>
+   <meta property="og:title" content="<%= brandname %>" />
+   <meta property="og:url" content="<%= config.websiteurl+req.url %>" />
+   <meta property="og:site_name" content="<%= brandname %>" />
+   <meta property="og:description" content="پنل کاربری <%= brandname %>" />
+   <title><%= defineContent('title') || brandname %></title>
+
+   <%- style %>
+ </head>
+ </head>
+
+ <body class="main">
+   <nav>
+     <div class="nav-wrapper purple darken-3">
+       <div>
+         <a href="/" class="brand-logo right padding-right-5"><%= brandname %></a>
+       </div>
+
+
+       <a href="#!" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+       <ul class="left hide-on-med-and-down">
+         <li>
+           <a href="/"><i class="material-icons">home</i></a>
+         </li>
+         <li>
+           <a href="#search-box" class="modal-trigger"><i class="material-icons">search</i></a>
+         </li>
+       </ul>
+       <ul class="sidenav" id="mobile-demo">
+         <% if(! auth.check){ %>
+         <li>
+           <div class="user-view">
+             <div class="background">
+               <img src="/images/menu/menu-nav.jpg" alt="menu">
+             </div>
+             <div class="row">
+               <div class="col s12 center">
+                 <p>وارد شوید یا ثبت نام کنید</p>
+               </div>
+               <div class="col s6">
+                 <a href="/auth/login" class="btn white black-text overFlow">ورود</a>
+               </div>
+               <div class="col s6">
+                 <a href="/auth/signup" class="btn white black-text overFlow">ثبت نام</a>
+               </div>
+             </div>
+           </div>
+         </li>
+         <% } %>
+         <li>
+           <a href="#search-box" class="modal-trigger"><i class="material-icons">search</i>جستجو</a>
+         </li>
+         <% categories.forEach(cate=>{ %>
+         <li>
+           <a href="<%= cate.path() %>"><i class="material-icons">subject</i><%= cate.name %></a>
+         </li>
+         <% }) %>
+         <% if(auth.check && req.originalUrl !== '/panel'){%>
+         <li>
+           <a href="/panel"><i class="material-icons">person_outline</i>پنل کاربری</a>
+         </li>
+         <% } %>
+         <% if(auth.check) { %>
+
+         <li>
+           <a href="/exit"><i class="material-icons">exit_to_app</i>خروج</a>
+         </li><% } %>
+         <li>
+           <a href="/"><i class="material-icons">home</i>صفحه اصلی</a>
+         </li>
+       </ul>
+
+     </div>
+   </nav>
+   <div id="search-box" class="modal height-important">
+     <div class="modal-content">
+       <nav>
+         <div class="nav-wrapper white">
+           <form action="/search" method="GET">
+             <div class="input-field">
+               <input type="search" name="search" dir="rtl" placeholder="دنبال چیزی می گردی؟ جستجو کن!" required>
+               <label class="label-icon" for="search"><i class="material-icons purple-text darken-3-text">search</i></label>
+               <div class="center">
+               <button type="submit" class="btn white purple-text darken-3-text hide-on-med-and-down">جستجو</button>
+                </div>          
+               </div>
+           </form>
+         </div>
+       </nav>
+     </div>
+   </div>
+   <main>
+     <%- body %>
+   </main>
+   <footer class="page-footer purple darken-3">
+     <div class="footer-copyright purple darken-3">
+       <div class="container">
+         <div class="center">
+           استفاده از مطالب <%= brandname %> برای مقاصد غیر تجاری و با ذکر نام "<%= brandname %>" و لینک به منبع بلامانع
+           است. تمامی حقوق برای <a href="#!" class="white-text">WGT</a> محفوظ می باشد.
+         </div>
+       </div>
+     </div>
+   </footer>
+
+   <script src="/js/jquery-3.4.1.min.js"></script>
+   <script src="/js/auth-Jquery.js"></script>
+   <script src="/js/materialize.min.js"></script>
+
+   <%- include(viewPath('layout/sweetAlert')) %>
+   <%- script %>
+ </body>
+
+ </html>

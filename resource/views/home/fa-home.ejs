@@ -1,0 +1,177 @@
+<header>
+<div class="navbar-fixed">
+        <nav>
+          <div class="nav-wrapper purple darken-3">
+            <a href="/" class="brand-logo right padding-right-5 text-effect"><%= brandname %></a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+              <% if(auth.check){%>
+              <li>
+                <a href="/exit"><i class="material-icons">exit_to_app</i></a>
+              </li>
+              <% } %>
+              <li>
+                <a href="#search-box" class="modal-trigger"><i class="material-icons">search</i></a>
+              </li>
+
+              <% if(! auth.check){ %>
+              <li>
+                <a href="/auth/signup">ثبت نام</a>
+              </li>
+              <li>
+                <a href="/auth/login">ورود</a>
+              </li><% } %><% if( auth.check && auth.admin){ %>
+              <li>
+                <a href="/admin">پنل مدیریت</a>
+              </li><%} %>
+              <% if(auth.check && req.originalUrl !== '/panel'){%>
+              <li>
+                <a href="/panel"><i class="material-icons">person_outline</i></a>
+              </li>
+              <% } %>
+            </ul>
+            <ul class="brand-logo center hide-on-med-and-down left-important">
+              <% categories.forEach(cate=>{ %>
+              <li>
+                <a href="<%= cate.path() %>"><%= cate.name %></a>
+              </li>
+              <% }) %>
+            </ul>
+            <a href="#!" data-target="mobile-demo" class="sidenav-trigger left">
+              <i class="material-icons">menu</i>
+            </a>
+
+            <ul class="sidenav" id="mobile-demo">
+              <% if(auth.check){ %>
+              <li>
+                <div class="user-view">
+                  <div class="background">
+                    <img src="/images/menu/menu-nav.jpg" alt="menu">
+                  </div>
+                  <a href="#user"><img class="circle" src="/images/user.png" alt="yuna"></a>
+                  <a href="#name"><span class="white-text name"><%= req.user.name %></span></a>
+                  <a href="#email"><span class="white-text email"><%= req.user.email %></span></a>
+                </div>
+              </li>
+              <% } else { %>
+              <li>
+                <div class="user-view">
+                  <div class="background">
+                    <img src="/images/menu/menu-nav.jpg" alt="menu">
+                  </div>
+                  <div class="row">
+                    <div class="col s12 center">
+                      <p>وارد شوید یا ثبت نام کنید</p>
+                    </div>
+                    <div class="col s6">
+                      <a href="/auth/login" class="btn white black-text overFlow">ورود</a>
+                    </div>
+                    <div class="col s6">
+                      <a href="/auth/signup" class="btn white black-text overFlow">ثبت نام</a>
+
+                    </div>
+                  </div>
+
+                </div>
+              </li>
+              <% } %>
+              <li>
+                <a href="#search-box" class="modal-trigger"><i class="material-icons">search</i>جستجو</a>
+              </li>
+              <% categories.forEach(cate=>{ %>
+              <li>
+                <a href="<%= cate.path() %>"><i class="material-icons">subject</i><%= cate.name %></a>
+              </li>
+              <% }) %>
+              <% if(auth.check && req.originalUrl !== '/panel'){%>
+              <li>
+                <a href="/panel"><i class="material-icons">person_outline</i>پنل کاربری</a>
+              </li>
+              <% } %>
+              <% if(auth.check && auth.admin){ %>
+              <li>
+                <a href="/admin">مدیریت</a>
+              </li>
+              <%  } %>
+              <% if(auth.check) { %>
+
+              <li>
+                <a href="/exit"><i class="material-icons">exit_to_app</i>خروج</a>
+              </li><% } %>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Modal Structure -->
+      <div id="search-box" class="modal height-important">
+        <div class="modal-content">
+          <nav>
+            <div class="nav-wrapper white">
+              <form action="/search" method="GET">
+                <div class="input-field">
+                  <input type="search" name="search" dir="rtl" placeholder="دنبال چیزی می گردی؟ جستجو کن!" required>
+                  <label class="label-icon" for="search"><i class="material-icons purple-text darken-3-text">search</i></label>
+                  <div class="center">
+                  <button type="submit" class="btn white purple-text darken-3-text hide-on-med-and-down">جستجو</button>
+            </div>
+        </div>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+</header>
+      <!-- End-of-Navbar-fixed -->
+
+      <div class="main">
+        <h1 class="hide"><%= config.keysentence %></h1>
+        <%- body %>
+      </div>
+
+      <!-- Footer -->
+      <footer class="page-footer  purple darken-3">
+        <div class="container">
+          <div class="row center">
+            <div class="col l6 s12">
+              <p class="white-text ">ما را در شبکه های اجتماعی دنبال کنید</p>
+              <a href="#facebook" rel="follow" class="padding-5"><img src="/images/svg/facebook.svg" alt="facebook"></a>
+              <a href="#youtube" rel="follow" class="padding-5" ><img src="/images/svg/youtube.svg" alt="youtube"></a>
+              <a href="#instagram" rel="follow" class="padding-5" ><img src="/images/svg/instagram.svg" alt="instagram"></a>
+              <a href="#telegram" rel="follow" class="padding-5" ><img src="/images/svg/telegram-app.svg" alt="telegram"></a>
+
+            </div>
+            <div class="col l2 s12">
+              <ul>
+                <li>
+                  <a class="grey-text text-lighten-3" href="/page/faq">سوالات متداول</a>
+                </li>
+                <li>
+                  <a class="grey-text text-lighten-3" href="/page/aboutus">درباره ما</a>
+                </li>
+                <li>
+                  <a class="grey-text text-lighten-3" href="/page/contactus">ارتباط با ما</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col l2 offset-l2 s12">
+              <ul>
+                <li>
+                  <a class="grey-text text-lighten-3" href="/page/privacy-policy">حریم خصوصی</a>
+                </li>
+                <li>
+                  <a class="grey-text text-lighten-3" href="/page/advertise">تبلیغات</a>
+                </li>
+                <li>
+                  <a class="grey-text text-lighten-3" href="/page/copyright">کپی رایت</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+استفاده از مطالب <%= brandname %> برای مقاصد غیر تجاری و با ذکر نام "<%= brandname %>" و لینک به منبع بلامانع است. تمامی حقوق برای <a href="#!" class="white-text">WGT</a> محفوظ می باشد.
+
+          </div>
+        </div>
+      </footer>

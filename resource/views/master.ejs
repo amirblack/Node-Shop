@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title><%- defineContent('title') || brandname + ' | Ligiato' %></title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <link rel="stylesheet" href="/css/public.css">
+  <link href='https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css' rel='stylesheet' type='text/css'>
+  <meta name="description" content="<%= description  %>">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="<%= config.websiteurl+req.url %>">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-chrome-192x192.png">
+  <link rel="manifest" href="/images/icons/manifest.json">
+  <link rel="mask-icon" href="/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:locale" content="fa_IR" /><% if(req.url == '/'){  %>
+  <meta property="og:type" content="website" /><% } else if(req.url=='/panel'){   %>
+  <meta property="og:type" content="panel" /><% } else {  %>
+  <meta property="og:type" content="article" /><% } %>
+  <meta property="og:title" content="<%= defineContent('title') %>" />
+  <meta property="og:url" content="<%= config.websiteurl+req.url %>" />
+  <meta property="og:site_name" content="<%= brandname %>" />
+  <meta property="og:description" content="<%= description %>" /> <%- defineContent('meta') %>
+  <%- style %>
+</head>
+
+<body dir="rtl">
+  <%- include(viewPath('home/fa-home')) %>
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/js/materialize.min.js"></script>
+  <script src="/js/public-Jquery.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157591974-1"></script>
+  <script src="/js/google-tag.js"></script>
+  <%- script %>
+</body>
+</html>

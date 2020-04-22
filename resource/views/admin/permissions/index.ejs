@@ -1,0 +1,49 @@
+<div class="right">
+  <div class="row">
+    <div class="col s12">
+<h4>اجازه دسترسی ها</h4>
+<a class="btn green" href="/admin/users/permissions/create">ساختن اجازه جدید</a>
+<a class="btn pink" href="/admin/users/roles">سطوح دسترسی</a>
+
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col s12">
+
+<div class="center">
+   
+    <div class="divider"></div>
+    <table class="highlight">
+        <thead>
+          <tr>
+              <th>نام</th>
+              <th>لیبل</th>
+              <th>تنظیمات</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% permissions.docs.forEach(permission=>{ %>
+
+          <tr>
+            <td><%= permission.name %> </td>
+            <td><%= permission.label %></td>
+            <td>
+              <form action="/admin/users/permissions/<%= permission.id %>?_method=DELETE" method="post">
+                <a href="/admin/users/permissions/edit/<%= permission.id %>" class="btn blue">ویرایش</a>
+                <button type="submit" class="btn red ">حذف</button>
+              </form> 
+            </td>
+          </tr>
+         <%   }) %>
+
+        </tbody>
+      </table>
+      <%- include(viewPath('layout/pagination'),{pagination:permissions}) %>
+      <%- include(viewPath('layout/sweetAlert')) %>
+</div>
+
+</div>
+</div>

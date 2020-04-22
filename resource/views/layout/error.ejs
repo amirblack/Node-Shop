@@ -1,0 +1,7 @@
+<% if(errors.length>0){ %>
+        <div class="card-panel red">
+    <% errors.forEach(err=>{ %>
+    <p class="white-text"><%= err %><br></p>
+    <% }) %>
+</div>
+<% } %>

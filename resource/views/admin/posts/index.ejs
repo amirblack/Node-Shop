@@ -1,0 +1,87 @@
+<div class="right">
+<div class="row"> 
+  <div class="col s12">
+<h4>پست ها</h4>
+<a class="btn green" href="/admin/posts/create">جدید</a>
+  </div>
+</div>
+
+</div>
+<div class="row">
+  <div class="col s12">
+<div class="center">
+   
+    <div class="divider"></div>
+    
+    <table class="responsive-table">
+       
+        <thead>
+          <tr>
+              <th>تیتر</th>
+              <th>تعداد بازدید</th>
+              <th>تعداد نظرات</th>
+              <th>وضعیت</th>
+              <th>تنظیمات</th>
+          </tr>
+        </thead>
+        
+        <% if(auth.check && useruse.myroles[0].label == 'site-manager'){ %>
+        <tbody>
+        <% posts.docs.forEach(post=>{ %>
+  
+          <tr>
+            <td><%= post.title %> </td>
+            <td><%= post.viewCount %></td>
+            <td><%= post.commentCount %></td>
+            <% if(post.type === true){ %>
+            <td>آماده شده</td>
+            <% } else if(post.type === false){ %>
+            <td>آماده نشده</td>
+            <% } %>
+            <td>
+              <form action="/admin/posts/<%= post.id %>?_method=DELETE" method="post">
+              <% if(post.type === false){ %> 
+                <a href="/admin/posts/previews/<%= post.id %>" target="_blank" class="btn green">پیش نمایش</a>
+              <% } %>
+                <a href="/admin/posts/edit/<%= post.id %>" class="btn blue">ویرایش</a>
+                <button type="submit" class="btn red ">حذف</button>
+              </form> 
+            </td>
+          </tr>
+      <%   }) %>
+        </tbody>
+          <% } else if(auth.check && useruse.myroles[0].label  == 'author' || useruse.myroles[1].label == 'author' ){ %>
+          <% if(authorposts.docs.length > 0){ %>
+           <tbody>
+          <% authorposts.docs.forEach(post=>{ %>
+          <tr>
+            <td><%= post.title %> </td>
+            <td><%= post.viewCount %></td>
+            <td><%= post.commentCount %></td>
+            <% if(post.type === true){ %>
+            <td>آماده شده</td>
+            <% } else if(post.type === false){ %>
+            <td>آماده نشده</td>
+            <% } %>
+            <td>
+              <form action="/admin/posts/<%= post.id %>?_method=DELETE" method="post">
+              <% if(post.type === false){ %> 
+                <a href="/admin/posts/previews/<%= post.id %>" target="_blank" class="btn green">پیش نمایش</a>
+              <% } %>
+                <a href="/admin/posts/edit/<%= post.id %>" class="btn blue">ویرایش</a>
+                <button type="submit" class="btn red ">حذف</button>
+              </form> 
+            </td>
+          </tr>      
+           <% }) %>
+           </tbody>
+           <% }else{ %>
+           <p>شما هنوز پستی را ایجاد نکرده اید!</p>
+           <% } %>
+          <% } %>
+        
+      </table>
+      <%- include(viewPath('layout/pagination'),{pagination:posts}) %>
+</div>
+</div>
+</div>

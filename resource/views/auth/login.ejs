@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="container">
+        <div class="col s12">
+            <%- include(viewPath('layout/error')) %>
+            <div class="card-panel border-radius-10">
+                <h5 class="center">ورود به حساب کاربری</h5>
+                <form action="/auth/login" method="post">
+                <input type="hidden" name="_csrf" value="<%= req.csrfToken() %>">
+                    <div class="row">
+                        <div class="input-field col s12"><input  id="email" type="email" name="email"
+                                data-length="20" placeholder="ایمیل را وارد کنید"></div>
+                        <div class="input-field col s12 "><input class="validate" id="password" type="password"
+                                name="password" data-length="30" placeholder="رمز عبور را وارد کنید"></div>
+                    
+                    <div class="input-field col s12">
+                        <%- recap %>
+                    </div>
+                    </div>
+                     <p>
+                    <label>
+                        <input type="checkbox" class="filled-in" onclick="seePassword()" />
+                        <span>دیدن رمز عبور</span>
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                        <input type="checkbox" class="filled-in" name="remember"  />
+                        <span>من رو به یاد داشته باش!</span>
+                    </label>
+                    </p>
+                    <div class="center"><button class="btn pink  waves-effect waves-light" type="submit"
+                            name="action">ورود</button>
+                        <p> حساب کاربری ندارید؟
+                            <a href="/auth/signup">ایجاد حساب</a>
+                        </p>
+                        <a href="/auth/forget">
+                            رمزم را فراموش کردم
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function seePassword() {
+  var passsword = document.getElementById("password");
+  if (passsword.type === "password") {
+    passsword.type = "text";
+  } else {
+    passsword.type = "password";
+  }
+}
+</script>
+<%- include(viewPath('layout/sweetAlert')) %>

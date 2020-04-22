@@ -1,0 +1,33 @@
+
+<div class="right">
+  <div class="row">
+  <div class="col s12">
+        <%- include(viewPath('layout/error')) %>
+        </div>
+
+            <form action="/admin/users/roles/create" method="post" >
+                <div class="input-field col s12">
+                    <h5>نام سطح</h5>
+                    <input type="text" name="name" id="name" placeholder="نام را وارد کنید" value="<%= old('name') %>">
+                </div>
+                <div class="input-field col s12">
+                    <h5>لیبل سطح</h5>
+                    <input type="text" name="label" id="label" placeholder="لیبل را وارد کنید" value="<%= old('label') %>">
+                </div>
+                <div class="input-field col s12">
+                      <h5>دسته بندی</h5>
+                    <select name="permissions" id="select" multiple>
+                    <option value="none" disabled selected >انتخاب کنید</option>
+                    <% permissions.forEach(permission=>{ %>
+                    <option value="<%= permission.id %>"><%= old('permissions' ,permission.name) %></option>
+                     <%}) %>
+                    </select>
+                </div>
+                <div class="col s12 center" style="padding-top: 10px;">
+                <button type="submit" class="btn purple darken-3">
+                    ارسال!
+                </button>
+                </div>
+            </form>
+  </div>
+  </div>

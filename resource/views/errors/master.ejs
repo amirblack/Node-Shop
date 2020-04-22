@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="canonical" href="https://ligiato.com">
+    <link rel="stylesheet" href="/css/materialize-rtl.css">
+    <link rel="stylesheet" href="/css/public.css">
+    <title><%= message %></title>
+    <style>
+
+        body {
+            background: #6A1B9A;
+            color: #fff;
+            max-height: 700px;
+            overflow: hidden;
+        }
+
+        .cloud {
+            width: 350px;
+            height: 120px;
+
+            background: #FFF;
+            background: linear-gradient(top, #FFF 100%);
+            background: -webkit-linear-gradient(top, #FFF 100%);
+            background: -moz-linear-gradient(top, #FFF 100%);
+            background: -ms-linear-gradient(top, #FFF 100%);
+            background: -o-linear-gradient(top, #FFF 100%);
+
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+
+            position: absolute;
+            margin: 120px auto 20px;
+            z-index: -1;
+            transition: ease 1s;
+        }
+
+        .cloud:after,
+        .cloud:before {
+            content: '';
+            position: absolute;
+            background: #FFF;
+            z-index: -1
+        }
+
+        .cloud:after {
+            width: 100px;
+            height: 100px;
+            top: -50px;
+            left: 50px;
+
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
+
+        .cloud:before {
+            width: 180px;
+            height: 180px;
+            top: -90px;
+            right: 50px;
+
+            border-radius: 200px;
+            -webkit-border-radius: 200px;
+            -moz-border-radius: 200px;
+        }
+
+        .x1 {
+            top: -50px;
+            left: 100px;
+            -webkit-transform: scale(0.3);
+            -moz-transform: scale(0.3);
+            transform: scale(0.3);
+            opacity: 0.9;
+            -webkit-animation: moveclouds 15s linear infinite;
+            -moz-animation: moveclouds 15s linear infinite;
+            -o-animation: moveclouds 15s linear infinite;
+        }
+
+        .x1_5 {
+            top: -80px;
+            left: 250px;
+            -webkit-transform: scale(0.3);
+            -moz-transform: scale(0.3);
+            transform: scale(0.3);
+            -webkit-animation: moveclouds 17s linear infinite;
+            -moz-animation: moveclouds 17s linear infinite;
+            -o-animation: moveclouds 17s linear infinite;
+        }
+
+        .x2 {
+            left: 250px;
+            top: 30px;
+            -webkit-transform: scale(0.6);
+            -moz-transform: scale(0.6);
+            transform: scale(0.6);
+            opacity: 0.6;
+            -webkit-animation: moveclouds 25s linear infinite;
+            -moz-animation: moveclouds 25s linear infinite;
+            -o-animation: moveclouds 25s linear infinite;
+        }
+
+        .x3 {
+            left: 250px;
+            bottom: -70px;
+
+            -webkit-transform: scale(0.6);
+            -moz-transform: scale(0.6);
+            transform: scale(0.6);
+            opacity: 0.8;
+
+            -webkit-animation: moveclouds 25s linear infinite;
+            -moz-animation: moveclouds 25s linear infinite;
+            -o-animation: moveclouds 25s linear infinite;
+        }
+
+        .x4 {
+            left: 470px;
+            botttom: 20px;
+
+            -webkit-transform: scale(0.75);
+            -moz-transform: scale(0.75);
+            transform: scale(0.75);
+            opacity: 0.75;
+
+            -webkit-animation: moveclouds 18s linear infinite;
+            -moz-animation: moveclouds 18s linear infinite;
+            -o-animation: moveclouds 18s linear infinite;
+        }
+
+        .x5 {
+            left: 200px;
+            top: 300px;
+
+            -webkit-transform: scale(0.5);
+            -moz-transform: scale(0.5);
+            transform: scale(0.5);
+            opacity: 0.8;
+
+            -webkit-animation: moveclouds 20s linear infinite;
+            -moz-animation: moveclouds 20s linear infinite;
+            -o-animation: moveclouds 20s linear infinite;
+        }
+
+        @-webkit-keyframes moveclouds {
+            0% {
+                margin-left: 1000px;
+            }
+
+            100% {
+                margin-left: -1000px;
+            }
+        }
+
+        @-moz-keyframes moveclouds {
+            0% {
+                margin-left: 1000px;
+            }
+
+            100% {
+                margin-left: -1000px;
+            }
+        }
+
+        @-o-keyframes moveclouds {
+            0% {
+                margin-left: 1000px;
+            }
+
+            100% {
+                margin-left: -1000px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="center" style="position: fixed;left:50%;top:50%;transform:translate(-50%,-50%);">
+            
+            <%- body %>
+            <a href="/" class="btn waves-effect waves-light white black-text">برگشت به خانه</a>
+            </div>
+        </div>
+    </div>
+</div>
+ <div id="clouds">
+            <div class="cloud x1"></div>
+            <div class="cloud x1_5"></div>
+            <div class="cloud x2"></div>
+            <div class="cloud x3"></div>
+            <div class="cloud x4"></div>
+            <div class="cloud x5"></div>
+        </div>
+</body>
+
+</html>

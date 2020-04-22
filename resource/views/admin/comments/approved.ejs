@@ -1,0 +1,46 @@
+<div class="right">
+<div class="row"> 
+  <div class="col s12">
+<h4>نظرات تایید شده</h4>
+<a class="btn blue" href="/admin/comments/">نظرات جدید</a>
+  </div>
+</div>
+
+</div>
+<div class="row">
+  <div class="col s12">
+<div class="center">
+   
+    <div class="divider"></div>
+    <table class=" responsive-table">
+        <thead>
+          <tr>
+              <th>کاربر</th>
+              <th>نظر</th>
+              <th>پست مربوطه</th>
+              <th>تنظیمات</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% comments.docs.forEach(comment=>{ %>
+
+          <tr>
+            <td><%= comment.name %> </td>
+            <td><%= comment.comment %></td>
+            <td><%= comment.Post.title %></td>
+            <td>
+              <form action="/admin/comments/<%= comment.id %>?_method=DELETE" method="post">
+                <button type="submit" class="btn red">حذف</button>
+              </form>
+            </td>
+          </tr>
+         <%   }) %>
+
+        </tbody>
+      </table>
+      <%- include(viewPath('layout/pagination'),{pagination:comments}) %>
+</div>
+</div>
+</div>
+    <%- include(viewPath('layout/sweetAlert')) %>

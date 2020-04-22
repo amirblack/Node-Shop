@@ -1,0 +1,28 @@
+
+<div class="right">
+  <div class="row">
+            <%- include(viewPath('layout/error')) %>
+            <h5>اضافه کردن سطح دسترسی</h5>
+            <form action="/admin/users/<%= user.id %>/addrole?_method=put" method="post" >
+                <div class="input-field col s12">
+                    <h5>نام - ایمیل</h5>
+                    <input type="text" name="name" id="name" placeholder="نام را وارد کنید" value="<%= user.name + '-' + user.email %>">
+                </div>
+                <div class="input-field col s12">
+                      <h5>دسته بندی</h5>
+                    <select name="roles" id="select" multiple>
+                    <option value="none" disabled selected >سطح دسترسی را انتخاب کنید</option>
+                    <% roles.forEach(role=>{ %>
+                    <option value="<%= role.id %>" <%= String(old('roles')) == String(role.id) ? 'selected' : '' %> ><%= role.label %></option>
+
+                     <%}) %>
+                    </select>
+                </div>
+                <div class="col s12 center" style="padding-top: 20px;">
+                <button type="submit" class="btn purple darken-3">
+                    ارسال!
+                </button>
+                </div>
+            </form>
+  </div>
+  </div>

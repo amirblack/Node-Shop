@@ -1,0 +1,47 @@
+<div class="right">
+  <div class="row">
+    <div class="col s12">
+<h4>دسته بندی ها</h4>
+<a class="btn green" href="/admin/categories/create">جدید</a>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col s12">
+
+<div class="center">
+   
+    <div class="divider"></div>
+    <table class="responsive-table">
+        <thead>
+          <tr>
+              <th>نام</th>
+              <th>پدر</th>
+              <th>تنظیمات</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% categories.docs.forEach(category=>{ %>
+
+          <tr>
+            <td><%= category.name %> </td>
+            <td><%= category.parent ? category.parent.name : 'Default' %></td>
+            <td>
+              <form action="/admin/categories/<%= category.id %>?_method=DELETE" method="post">
+                <a href="/admin/categories/edit/<%= category.id %>" class="btn blue">ویرایش</a>
+                <button type="submit" class="btn red ">حذف</button>
+              </form> 
+            </td>
+          </tr>
+         <%   }) %>
+
+        </tbody>
+      </table>
+      <%- include(viewPath('layout/pagination'),{pagination:categories}) %>
+      <%- include(viewPath('layout/sweetAlert')) %>
+</div>
+
+</div>
+</div>

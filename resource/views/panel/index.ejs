@@ -1,0 +1,134 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <%- include(viewPath('layout/error')) %>
+            </div>
+
+
+            <%- include(viewPath('layout/sweetAlert')) %>
+
+            <div class="col s12 padding-top-5">
+                <ul class="tabs">
+                    <li class="tab col s4"><a class="active" href="#profile">پروفایل</a></li>
+                    <li class="tab col s4"><a href="#setting">تنظیمات</a></li>
+                    <li class="tab col s4"><a href="#editname">ویرایش</a></li>
+                </ul>
+            </div>
+            <div id="profile" class="col s12">
+                <div class="row">
+                    <div class="col l6 offset-l6 s12">
+                        <h5> اطلاعات کاربری</h5>
+                    </div>
+                    <div class="col l6 offset-l6 s12">
+                        <p>نام کاربر: <%= req.user.name %></p>
+                    </div>
+                    <div class="col l6 offset-l6 s12">
+                        <p>ایمیل کاربر: <%= req.user.email %></p>
+                    </div>
+                    <div class="col l6 offset-l6 s12">
+                        <p>تاریخ ایجاد حساب: <%= date(req.user.createdAt).fromNow() %></p>
+                    </div>
+                </div>
+            </div>
+            <div id="setting" class="col s12">
+
+
+                <div class="card z-depth-0">
+                    <h5>
+                        ویرایش رمز عبور
+                    </h5>
+                </div>
+                <form action="/panel/changepassword" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= req.csrfToken() %>">
+                    <div class="input-field col l6 offset-l6 s12">
+                        <input type="password" name="oldpassword" id="oldPas" class="validate" data-length="30">
+                        <label for="oldPas">رمز عبور فعلی</label>
+                    </div>
+                    <div class="col l6 offset-l6 s12">
+                        <a href="#resetpassword" class="btn blue waves-effect waves-light modal-trigger"> فراموشی رمز عبور فعلی؟</a></div>
+                    <div class="input-field col l6 offset-l6 s12">
+                        <input type="password" name="newpassword" id="newPas" class="validate" data-length="30">
+                        <label for="newPas">رمز عبور جدید</label>
+                    </div>
+                    <div class="input-field col l6 offset-l6 s12">
+                        <input type="password" name="reppassword" id="repPas" class="validate" data-length="30">
+                        <label for="repPas">تکرار رمز عبور جدید</label>
+                    </div>
+                    <div class="col s12">
+                    <p >
+                    <label>
+                        <input type="checkbox" class="filled-in" onclick="seePassword()" />
+                        <span>دیدن رمز عبور</span>
+                    </label>
+                    </p></div>
+                    <div class="col s12">
+                    <button type="submit" class="btn green">ذخیره</button>
+                    </div>
+                </form>
+            </div>
+            <div id="editname" class="col s12">
+
+
+                <div class="col l4 offset-l8 s12">
+                    <h5>ویرایش اطلاعات</h5>
+                </div>
+
+                <form action="/panel/editdata" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= req.csrfToken() %>">
+                    <div class="input-field col l4 offset-l8 s12">
+                        <input type="text" class="validate" id="name" name="name" data-length="30">
+                        <label for="name">نام و نام خانوادگی *</label>
+                    </div>
+                    <div class="col l4 offset-l8 s12 ">
+                        <p>این فیلد می تواند توسط هر کسی دیده شود.</p>
+                        <button type="submit" class="btn green">ذخیره</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</header>
+<div class="modal" id="resetpassword">
+    <div class="modal-content">
+
+                <form action="/auth/reset" method="post">
+                <input type="hidden" name="_csrf" value="<%= req.csrfToken() %>">
+                    <div class="row">
+                        <div class="input-field col s12"><input  id="email" type="email" name="email"
+                                data-length="20" value="<%= old('email') %>" placeholder="ایمیل را وارد کنید"></div>
+                    
+                    </div>
+                    <div class="center"><button class="btn pink  waves-effect waves-light" type="submit"
+                            name="action">ارسال!</button>
+                        
+                    </div>
+                </form>
+                
+        
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
+        $('.tabs').tabs();
+    })
+</script>
+<script>
+function seePassword() {
+  var oldpassword = document.getElementById("oldPas");
+  var newpas = document.getElementById("newPas")
+  var reppas = document.getElementById("repPas")
+
+  if (oldpassword.type === "password" && newpas.type === "password" && reppas.type === "password") {
+    oldpassword.type = "text";
+    reppas.type = "text";
+    newpas.type = "text";
+  } else {
+    oldpassword.type = "password";
+    reppas.type = "password";
+    newpas.type = "password";
+  }
+}
+</script>
