@@ -15,7 +15,7 @@ class singleController extends Controller {
             return res.render('single/index', {
                 single,
                 categories,
-                description:description[0].substring(3),
+                description: description[0].substring(3),
                 title: 'تبلیغات - لیجیاتو',
             });
         } catch (err) {
@@ -33,7 +33,7 @@ class singleController extends Controller {
             return res.render('single/index', {
                 single,
                 categories,
-                description:description[0].substring(3),
+                description: description[0].substring(3),
                 title: 'سوالات متداول - لیجیاتو',
             })
         } catch (err) {
@@ -51,7 +51,7 @@ class singleController extends Controller {
             return res.render('single/index', {
                 single,
                 categories,
-                description:description[0].substring(3),
+                description: description[0].substring(3),
                 title: 'کپی رایت - لیجیاتو',
             });
         } catch (err) {
@@ -69,7 +69,7 @@ class singleController extends Controller {
             return res.render('single/index', {
                 single,
                 categories,
-                description:description[0].substring(3),
+                description: description[0].substring(3),
                 title: 'ارتباط با ما - لیجیاتو'
             });
         } catch (err) {
@@ -87,7 +87,7 @@ class singleController extends Controller {
             return res.render('single/index', {
                 single,
                 categories,
-                description:description[0].substring(3),
+                description: description[0].substring(3),
                 title: 'حریم خصوصی و مقررات - لیجیاتو',
             });
         } catch (err) {
@@ -105,7 +105,7 @@ class singleController extends Controller {
             return res.render('single/index', {
                 single,
                 categories,
-                description:description[0].substring(3),
+                description: description[0].substring(3),
                 title: 'درباره ما - لیجیاتو',
             });
         } catch (err) {

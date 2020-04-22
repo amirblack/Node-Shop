@@ -5,55 +5,57 @@ const PasswordReset = require('app/models/PasswordReset')
 const uniqueString = require('unique-string')
 const transporter = require("app/helper/mail");
 const bcrypt = require('bcryptjs')
-class passwordResetController  extends controller{
-    async showForm(req,res){
-        let categories = await Category.find({})
-        res.render('auth/resetpassword',{
-            categories,
-            title:'فراموشی رمز عبور',
-            recap:this.recaptcha.render(),
-        })
-    }
-    async passwordResetProcess(req,res){
-		if(! req.originalUrl == '/panel'){
-			await this.recaptchValidation(req,res);
+class passwordResetController extends controller {
+	async showForm(req, res) {
+		let categories = await Category.find({})
+		res.render('auth/resetpassword', {
+			categories,
+			title: 'فراموشی رمز عبور',
+			recap: this.recaptcha.render(),
+		})
+	}
+	async passwordResetProcess(req, res) {
+		if (!req.originalUrl == '/panel') {
+			// await this.recaptchValidation(req,res);
 		}
-        let result = await this.validationData(req)
-        if(result){
-            return this.postedForm(req,res)
-        }
-        return this.alertBack(req,res,{
-            title:'دقت کنید',
-            message:'مشکلی در فرم وجود دارد!',
-            timer:5000,
-            type:'error',
-            button:null,
-        });
-        
-    }
+		let result = await this.validationData(req)
+		if (result) {
+			return this.postedForm(req, res)
+		}
+		return this.alertBack(req, res, {
+			title: 'دقت کنید',
+			message: 'مشکلی در فرم وجود دارد!',
+			timer: 5000,
+			type: 'error',
+			button: null,
+		});
 
-    async postedForm(req,res){
-        let user = await User.findOne({email:req.body.email})
-        if(!user){
-            return this.alertBack(req,res,{
-                title:'هشدار',
-                message:'اطلاعات کاربر یافت نشد!',
-                timer:6000,
-                type:'error',
-                button:null,
-        })
-        }
-        const newPasswordReset = new PasswordReset({
-            email:req.body.email,
-            token:uniqueString(),
-        })
-        await newPasswordReset.save()
-      let options = {
-        from: '"Ligiato" <info@ligiato.com>', // sender address
-        to: `${newPasswordReset.email}`, // list of receivers
-        subject: "بازیابی کردن رمز عبور", // Subject line
-        text:'بازیابی کردن رمز عبور',
-        html:`
+	}
+
+	async postedForm(req, res) {
+		let user = await User.findOne({
+			email: req.body.email
+		})
+		if (!user) {
+			return this.alertBack(req, res, {
+				title: 'هشدار',
+				message: 'اطلاعات کاربر یافت نشد!',
+				timer: 6000,
+				type: 'error',
+				button: null,
+			})
+		}
+		const newPasswordReset = new PasswordReset({
+			email: req.body.email,
+			token: uniqueString(),
+		})
+		await newPasswordReset.save()
+		let options = {
+			from: '"Ligiato" <info@ligiato.com>', // sender address
+			to: `${newPasswordReset.email}`, // list of receivers
+			subject: "بازیابی کردن رمز عبور", // Subject line
+			text: 'بازیابی کردن رمز عبور',
+			html: `
         <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
 	xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -73,18 +75,7 @@ class passwordResetController  extends controller{
 			height: 100% !important;
 			width: 100% !important;
 			background: #f1f1f1;
-			font-weight: normal;
-			font-family: 'Vazir';
-			@font-face {
-  font-family: Vazir;
-  src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.eot');
-  src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.eot?#iefix') format('embedded-opentype'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff2') format('woff2'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff') format('woff'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.ttf') format('truetype');
-  font-weight: normal;
-}
-			">
+			font-weight: normal;">
 	<center style="width: 100%; background-color: #f1f1f1;">
 		<div
 			style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all;">
@@ -144,20 +135,20 @@ class passwordResetController  extends controller{
 
 </html>
         `,
-    };
-    transporter.sendMail(options,(err)=>{
-        if(err) return this.error('خطایی رخ داده',500)
-    })
-    
-         this.alertMessage(req,{
-            title:'ایمیل با موفقیت ارسال شد',
-            message:null,
-            timer:3000,
-            type:'success',
-            button:null,
-        })
-        return res.redirect('/auth/login')
-    }
+		};
+		transporter.sendMail(options, (err) => {
+			if (err) return this.error('خطایی رخ داده', 500)
+		})
+
+		this.alertMessage(req, {
+			title: 'ایمیل با موفقیت ارسال شد',
+			message: null,
+			timer: 3000,
+			type: 'success',
+			button: null,
+		})
+		return res.redirect('/auth/login')
+	}
 
 }
 

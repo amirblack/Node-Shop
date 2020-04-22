@@ -9,7 +9,7 @@ class registerController extends Controller {
         let categories = await Category.find({})
         res.render('auth/signup', {
             categories,
-            title:'ایجاد حساب',
+            title: 'ایجاد حساب',
             recap: this.recaptcha.render()
         })
     }
@@ -17,21 +17,21 @@ class registerController extends Controller {
         let categories = await Category.find({})
         res.render('auth/login', {
             categories,
-            title:'ورود',
+            title: 'ورود',
             recap: this.recaptcha.render(),
         })
     }
     async registerProccess(req, res, next) {
-        
-        // await this.recaptchValidation(req,res);
-        
+
+        await this.recaptchValidation(req, res);
+
         let result = await this.validationData(req)
-        
-        if(result){
-            return this.registerSignup(req,res,next)
+
+        if (result) {
+            return this.registerSignup(req, res, next)
         } else {
-            req.flash('errors','Error!')
-        return res.redirect('/auth/signup')
+            req.flash('errors', 'Error!')
+            return res.redirect('/auth/signup')
         }
     }
     async loginProccess(req, res, next) {
@@ -39,32 +39,32 @@ class registerController extends Controller {
         // await this.recaptchValidation(req,res);
 
         let result = await this.validationData(req)
-        if(result){
-            return  this.loginPassport(req,res,next)
-        } else{
-        return res.redirect('/auth/login')
+        if (result) {
+            return this.loginPassport(req, res, next)
+        } else {
+            return res.redirect('/auth/login')
 
         }
     }
-    
+
     registerSignup(req, res, next) {
-        passport.authenticate('local.register',async (err,user)=>{
-            if(err) this.error('خطایی رخ داده است',500)
-            
-                    let token = uniqueString()
-                    let newActCode = new activeUser({
-                    user:user.id,
-                    token,
-                    expire:Date.now() + 1000 * 60 * 15
-                })
-                await newActCode.save()
-          
-                let options = {
-                    from: '"Ligiato" <info@ligiato.com>', // sender address
-                    to: `${user.email}`, // list of receivers
-                    subject: "فعال سازی حساب", // Subject line
-                    text:'حساب کاربری لیجیاتو',
-                    html:`
+        passport.authenticate('local.register', async (err, user) => {
+            if (err) this.error('خطایی رخ داده است', 500)
+
+            let token = uniqueString()
+            let newActCode = new activeUser({
+                user: user.id,
+                token,
+                expire: Date.now() + 1000 * 60 * 15
+            })
+            await newActCode.save()
+
+            let options = {
+                from: '"Ligiato" <info@ligiato.com>', // sender address
+                to: `${user.email}`, // list of receivers
+                subject: "فعال سازی حساب", // Subject line
+                text: 'حساب کاربری لیجیاتو',
+                html: `
                     <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
 	xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -84,18 +84,7 @@ class registerController extends Controller {
 			height: 100% !important;
 			width: 100% !important;
 			background: #f1f1f1;
-			font-weight: normal;
-			font-family: 'Vazir';
-			@font-face {
-  font-family: Vazir;
-  src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.eot');
-  src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.eot?#iefix') format('embedded-opentype'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff2') format('woff2'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff') format('woff'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.ttf') format('truetype');
-  font-weight: normal;
-}
-			">
+			font-weight: normal;">
 	<center style="width: 100%; background-color: #f1f1f1;">
 		<div
 			style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all;">
@@ -154,53 +143,56 @@ class registerController extends Controller {
 
 </html>
                     `,
-                };
-                transporter.sendMail(options,(err,info)=>{
-                    if(err) return this.error('خطایی رخ داده',500)
-                    this.alertMessage(req,{
-                        title:'لینک فعال سازی اکانت برای شما ارسال شد!',
-                        timer:20000,
-                        button:true,
-                        type:'success',
-                        message:null,
-                    })
-                    return res.redirect('/auth/login')
-                    
+            };
+            transporter.sendMail(options, (err, info) => {
+                if (err) return this.error('خطایی رخ داده', 500)
+                this.alertMessage(req, {
+                    title: 'لینک فعال سازی اکانت برای شما ارسال شد!',
+                    timer: 20000,
+                    button: true,
+                    type: 'success',
+                    message: null,
                 })
-                return;
+                return res.redirect('/auth/login')
+
+            })
+            return;
         })(req, res, next)
 
     }
     loginPassport(req, res, next) {
-        passport.authenticate('local.login',async (err, user) => {
-            if (! user) return res.redirect('/auth/login')
-            
-            if(! user.active){
-                let activeCode = await activeUser.find({user:user.id}).gt('expire',new Date()).sort({createdAt:-1}).limit(1).exec()
-                if(activeCode.length){
-                    this.alertBack(req,res,{
-                        title:'اکانت شما فعال نیست:(',
-                        message:'برای ارسال دوباره کد فعال سازی 15 دقیقه صبر کنید!',
-                        timer:6000,
-                        type:'error',
-                        button:null,
+        passport.authenticate('local.login', async (err, user) => {
+            if (!user) return res.redirect('/auth/login')
+
+            if (!user.active) {
+                let activeCode = await activeUser.find({
+                    user: user.id
+                }).gt('expire', new Date()).sort({
+                    createdAt: -1
+                }).limit(1).exec()
+                if (activeCode.length) {
+                    this.alertBack(req, res, {
+                        title: 'اکانت شما فعال نیست:(',
+                        message: 'برای ارسال دوباره کد فعال سازی 15 دقیقه صبر کنید!',
+                        timer: 6000,
+                        type: 'error',
+                        button: null,
                     })
                     return;
-                }
-                else {
+                } else {
                     let token = uniqueString()
                     let newActCode = new activeUser({
-                    user:user.id,
-                    token,
-                    expire:Date.now() + 1000 * 60 * 15
-                })
-                await newActCode.save()
-                let options = {
-                    from: '"Ligiato" <info@ligiato.com>', // sender address
-                    to: `${user.email}`, // list of receivers
-                    subject: "فعال سازی حساب", // Subject line
-                  text:'حساب کاربری لیجیاتو',
-                    html:`
+                        user: user.id,
+                        token,
+                        expire: Date.now() + 1000 * 60 * 15
+                    })
+                    await newActCode.save()
+                    let options = {
+                        from: '"Ligiato" <info@ligiato.com>', // sender address
+                        to: `${user.email}`, // list of receivers
+                        subject: "فعال سازی حساب", // Subject line
+                        text: 'حساب کاربری لیجیاتو',
+                        html: `
                     <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
 	xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -220,18 +212,7 @@ class registerController extends Controller {
 			height: 100% !important;
 			width: 100% !important;
 			background: #f1f1f1;
-			font-weight: normal;
-			font-family: 'Vazir';
-			@font-face {
-  font-family: Vazir;
-  src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.eot');
-  src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.eot?#iefix') format('embedded-opentype'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff2') format('woff2'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff') format('woff'),
-       url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.ttf') format('truetype');
-  font-weight: normal;
-}
-			">
+			font-weight: normal;">
 	<center style="width: 100%; background-color: #f1f1f1;">
 		<div
 			style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all;">
@@ -290,90 +271,96 @@ class registerController extends Controller {
 
 </html>
                     `,
-                };
-                transporter.sendMail(options,(err)=>{
-                    if(err) this.error('خطایی رخ داده',500)
-                    this.alertMessage(req,{
-                        title:'با موفقیت لینک فعال سازی اکانت برای شما ارسال شد!',
-                        timer:5000,
-                        button:null,
-                        type:'success',
-                        message:null,
+                    };
+                    transporter.sendMail(options, (err) => {
+                        if (err) this.error('خطایی رخ داده', 500)
+                        this.alertMessage(req, {
+                            title: 'با موفقیت لینک فعال سازی اکانت برای شما ارسال شد!',
+                            timer: 5000,
+                            button: null,
+                            type: 'success',
+                            message: null,
+                        })
+                        return res.redirect('/')
+
                     })
+                    return;
+                }
+
+
+
+            } else {
+                req.logIn(user, err => {
+
+                    if (req.body.remember) {
+                        user.setRememberToken(res)
+                    }
+                    if (err) {
+                        return res.json(err)
+                    }
+
                     return res.redirect('/')
-                    
+
                 })
-                return;
-                }
-
-               
-                
-            } else{
-            req.logIn(user, err => {
-
-                if (req.body.remember) {
-                    user.setRememberToken(res)
-                }
-              if(err){
-                  return res.json(err)
-              }
-
-              return res.redirect('/')
-    
-            })
             }
         })(req, res, next)
     }
-    async active(req,res,next){
+    async active(req, res, next) {
         try {
-            
-            let actCode = await activeUser.findOne({token:req.params.token}).populate('user').exec()
-            if(! actCode){
-                this.alertMessage(req,{
-                    title:'هشدار',
-                    message:'چنین لینک فعال سازی وجود ندارد',
-                    type:'error',
-                    timer:null,
-                    button:'خب',
+
+            let actCode = await activeUser.findOne({
+                token: req.params.token
+            }).populate('user').exec()
+            if (!actCode) {
+                this.alertMessage(req, {
+                    title: 'هشدار',
+                    message: 'چنین لینک فعال سازی وجود ندارد',
+                    type: 'error',
+                    timer: null,
+                    button: 'خب',
                 })
                 return res.redirect('/')
             }
-            if(actCode.expire < new Date()){
-                this.alertMessage(req,{
-                    title:'هشدار',
-                    message:'مهلت استفاده از لینک به اتمام رسیده',
-                    type:'error',
-                    timer:null,
-                    button:'خب',
+            if (actCode.expire < new Date()) {
+                this.alertMessage(req, {
+                    title: 'هشدار',
+                    message: 'مهلت استفاده از لینک به اتمام رسیده',
+                    type: 'error',
+                    timer: null,
+                    button: 'خب',
                 })
                 return res.redirect('/')
             }
-            if(actCode.used){
-                this.alertMessage(req,{
-                    title:'هشدار',
-                    message:'مهلت استفاده از لینک به اتمام رسیده',
-                    type:'error',
-                    timer:null,
-                    button:'خب',
+            if (actCode.used) {
+                this.alertMessage(req, {
+                    title: 'هشدار',
+                    message: 'مهلت استفاده از لینک به اتمام رسیده',
+                    type: 'error',
+                    timer: null,
+                    button: 'خب',
                 })
                 return res.redirect('/')
             }
             let user = actCode.user;
-            user.$set({active:true})
-            actCode.$set({used:true})
+            user.$set({
+                active: true
+            })
+            actCode.$set({
+                used: true
+            })
             await user.save()
             await actCode.save()
             req.logIn(user, err => {
 
                 user.setRememberToken(res)
-              this.alertMessage(req,{
-                    title:'با تشکر',
-                    message:'حساب کاربری شما فعال گردید!',
-                    type:'success',
-                    timer:6000,
-                    button:'خب',
+                this.alertMessage(req, {
+                    title: 'با تشکر',
+                    message: 'حساب کاربری شما فعال گردید!',
+                    type: 'success',
+                    timer: 6000,
+                    button: 'خب',
                 })
-              return res.redirect('/')
+                return res.redirect('/')
             })
         } catch (err) {
             next(err)
