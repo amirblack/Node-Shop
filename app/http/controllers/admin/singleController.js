@@ -38,7 +38,7 @@ class singleController extends Controller {
     async create(req, res, next) {
         try {
             let result = await this.validationData(req)
-            if (!result) return this.alertBack(req, res, {
+            if (! result) return this.alertBack(req, res, {
                 title: 'دقت کنید',
                 message: '!مشکلی در فرم ها وجود دارد',
                 timer: 5000,
@@ -105,7 +105,7 @@ class singleController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let result = await this.validationData(req)
-            if (!result) {
+            if (! result) {
                 if (req.file) {
                     LiaraClient.removeObject('single', req.file.originalname)
                 }
@@ -149,7 +149,7 @@ class singleController extends Controller {
 
     }
     file(req, res, next) {
-        if (!req.file) {
+        if (! req.file) {
             req.body.images = undefined
         } else {
             req.body.images = req.file.originalname;
