@@ -60,7 +60,7 @@ class postsController extends Controller {
         try {
 
             let result = await this.validationData(req)
-            if (!result) {
+            if (! result) {
                 if (req.file) {
                     LiaraClient.removeObject('post', req.file.originalname, function (err) {
                         if (err)
@@ -118,7 +118,7 @@ class postsController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let destory = await Post.findById(req.params.id).populate('comments')
-            if (!destory) return this.error('چنین پستی یافت نشد', 404)
+            if (! destory) return this.error('چنین پستی یافت نشد', 404)
             Object.values(destory.comments).forEach(comment => comment.remove())
             await LiaraClient.removeObject('post', path.parse(destory.images).base)
             await destory.remove()
@@ -134,7 +134,7 @@ class postsController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let posts = await Post.findById(req.params.id)
-            if (!posts) {
+            if (! posts) {
                 this.error('چنین محصولی یافت نشد', 404)
             }
             let categories = await Category.find({});
@@ -155,7 +155,7 @@ class postsController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let result = await this.validationData(req)
-            if (!result) {
+            if (! result) {
                 if (req.file) {
                     LiaraClient.removeObject('post', req.file.originalname, function (err) {
                         if (err)

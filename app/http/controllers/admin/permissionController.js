@@ -35,7 +35,7 @@ class permissionController extends Controller {
     async create(req, res, next) {
         try {
             let result = await this.validationData(req)
-            if (!result) return this.back(req, res)
+            if (! result) return this.back(req, res)
             let {
                 name,
                 label
@@ -56,7 +56,7 @@ class permissionController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let permissions = await Permission.findById(req.params.id);
-            if (!permissions) this.error('چنین اجازه  ای یافت نشد', 404)
+            if (! permissions) this.error('چنین اجازه  ای یافت نشد', 404)
             permissions.remove()
             return this.alertBack(req, res, {
                 title: 'حذف شد',
@@ -76,7 +76,7 @@ class permissionController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let permissions = await Permission.findById(req.params.id);
-            if (!permissions) this.error('چنین اجازه ای وجود ندارد', 404);
+            if (! permissions) this.error('چنین اجازه ای وجود ندارد', 404);
             let useruse = await User.findById(req.user.id).populate('myroles')
             return res.render('admin/permissions/edit', {
                 title: 'editPermission',
@@ -92,7 +92,7 @@ class permissionController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let result = await this.validationData(req)
-            if (!result) return this.back(req, res)
+            if (! result) return this.back(req, res)
             let {
                 name,
                 label

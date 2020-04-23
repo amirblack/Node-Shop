@@ -39,7 +39,7 @@ class categoryController extends Controller {
     async create(req, res, next) {
         try {
             let result = await this.validationData(req)
-            if (!result) return this.back(req, res)
+            if (! result) return this.back(req, res)
             let {
                 name,
                 slug,
@@ -63,7 +63,7 @@ class categoryController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let category = await Category.findById(req.params.id).populate('childs').exec()
-            if (!category) this.error('چنین دسته ای یافت نشد', 404)
+            if (! category) this.error('چنین دسته ای یافت نشد', 404)
 
             category.childs.forEach(cate => cate.remove())
             await LiaraClient.removeObject('category', path.parse(category.images).base)
@@ -87,7 +87,7 @@ class categoryController extends Controller {
             this.isMongoId(req.params.id)
             let category = await Category.findById(req.params.id);
             let useruse = await User.findById(req.user.id).populate('myroles');
-            if (!category) this.error('چنین دسته ای وجود ندارد', 404);
+            if (! category) this.error('چنین دسته ای وجود ندارد', 404);
             return res.render('admin/categories/edit', {
                 title: 'editCategory',
                 category,
@@ -102,7 +102,7 @@ class categoryController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let result = await this.validationData(req)
-            if (!result) {
+            if (! result) {
                 if (req.file) {
                     LiaraClient.removeObject('category', req.file.originalname)
                 }
@@ -142,7 +142,7 @@ class categoryController extends Controller {
 
     }
     file(req, res, next) {
-        if (!req.file) {
+        if (! req.file) {
             req.body.images = undefined
         } else {
             req.body.images = req.file.originalname;

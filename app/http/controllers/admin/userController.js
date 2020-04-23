@@ -76,7 +76,7 @@ class userController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let users = await User.findById(req.params.id).exec()
-            if (!users) this.error('چنین کاربری  یافت نشد', 404)
+            if (! users) this.error('چنین کاربری  یافت نشد', 404)
 
             await users.remove()
             return this.alertBack(req, res, {
@@ -100,7 +100,7 @@ class userController extends Controller {
             let categories = await Category.find({
                 parent: null
             });
-            if (!category) this.error('چنین دسته ای وجود ندارد', 404);
+            if (! category) this.error('چنین دسته ای وجود ندارد', 404);
             let useruse = await User.findById(req.user.id).populate('myroles')
             return res.render('admin/categories/edit', {
                 category,
@@ -116,7 +116,7 @@ class userController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let result = await this.validationData(req)
-            if (!result) {
+            if (! result) {
                 if (req.file) {
                     fs.unlinkSync(req.file.path)
                 }
@@ -156,7 +156,7 @@ class userController extends Controller {
             this.isMongoId(req.params.id)
             let user = await User.findById(req.params.id);
             let roles = await Role.find({});
-            if (!user) return this.error('چنین کاربری وجود ندارد!', 404)
+            if (! user) return this.error('چنین کاربری وجود ندارد!', 404)
             let useruse = await User.findById(req.user.id).populate('myroles')
             res.render('admin/users/addrole', {
                 title: 'addRole',
@@ -173,7 +173,7 @@ class userController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let user = await User.findById(req.params.id);
-            if (!user) this.error('چنین کاربری وجود ندارد', 404)
+            if (! user) this.error('چنین کاربری وجود ندارد', 404)
             user.set({
                 roles: req.body.roles
             })

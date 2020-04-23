@@ -40,7 +40,7 @@ class Comments extends Controller {
         try {
             this.isMongoId(req.params.id)
             let comments = await Comment.findById(req.params.id)
-            if (!comments)
+            if (! comments)
                 this.error('چنین کامنتی یافت نشد', 404)
             comments.remove()
             return this.alertBack(req, res, {
@@ -96,7 +96,7 @@ class Comments extends Controller {
         try {
             this.isMongoId(req.params.id)
             let comments = await Comment.findById(req.params.id).populate('belongTo').exec();
-            if (!comments) this.err('چنین کامنتی وجود ندارد', 404)
+            if (! comments) this.err('چنین کامنتی وجود ندارد', 404)
             await comments.belongTo.inc('commentCount')
             comments.approved = true
             await comments.save()

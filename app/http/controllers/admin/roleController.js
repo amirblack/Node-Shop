@@ -38,7 +38,7 @@ class roleController extends Controller {
     async create(req, res, next) {
         try {
             let result = await this.validationData(req)
-            if (!result) return this.back(req, res)
+            if (! result) return this.back(req, res)
             let {
                 name,
                 label,
@@ -61,7 +61,7 @@ class roleController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let roles = await Role.findById(req.params.id);
-            if (!roles) this.error('چنین سطح دسترسی  یافت نشد', 404)
+            if (! roles) this.error('چنین سطح دسترسی  یافت نشد', 404)
             roles.remove()
             return this.alertBack(req, res, {
                 title: 'حذف شد!',
@@ -83,7 +83,7 @@ class roleController extends Controller {
 
             let roles = await Role.findById(req.params.id);
             let permissions = await Permission.find()
-            if (!roles) this.error('چنین سطح دسترسی ای وجود ندارد', 404);
+            if (! roles) this.error('چنین سطح دسترسی ای وجود ندارد', 404);
             let useruse = await User.findById(req.user.id).populate('myroles')
             return res.render('admin/roles/edit', {
                 title: 'editRole',
@@ -100,7 +100,7 @@ class roleController extends Controller {
         try {
             this.isMongoId(req.params.id)
             let result = await this.validationData(req)
-            if (!result) return this.back(req, res)
+            if (! result) return this.back(req, res)
             let {
                 name,
                 label,
