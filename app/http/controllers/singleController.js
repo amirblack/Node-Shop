@@ -58,42 +58,6 @@ class singleController extends Controller {
             next(err)
         }
     }
-    async contactus(req, res, next) {
-        try {
-            let single = await Single.findOne({
-                slug: 'contactus'
-            })
-            if (!single) this.error('چنین صفحه ای وجود ندارد!', 404)
-            let categories = await Category.find({}, 'name slug')
-            let description = single.body.split(".")
-            return res.render('single/index', {
-                single,
-                categories,
-                description: description[0].substring(3),
-                title: 'ارتباط با ما - لیجیاتو'
-            });
-        } catch (err) {
-            next(err)
-        }
-    }
-    async policy(req, res, next) {
-        try {
-            let single = await Single.findOne({
-                slug: 'privacy-policy'
-            })
-            if (!single) this.error('چنین صفحه ای وجود ندارد!', 404)
-            let categories = await Category.find({}, 'name slug')
-            let description = single.body.split(".")
-            return res.render('single/index', {
-                single,
-                categories,
-                description: description[0].substring(3),
-                title: 'حریم خصوصی و مقررات - لیجیاتو',
-            });
-        } catch (err) {
-            next(err)
-        }
-    }
     async aboutus(req, res, next) {
         try {
             let single = await Single.findOne({

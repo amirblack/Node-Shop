@@ -46,8 +46,6 @@ router.get('/page',(req,res)=>{
 router.get('/page/advertise',singleController.ads)
 router.get('/page/faq',singleController.faq)
 router.get('/page/copyright',singleController.copyright)
-router.get('/page/contactus',singleController.contactus)
-router.get('/page/privacy-policy',singleController.policy)
 router.get('/page/aboutus',singleController.aboutus)
 
 //sitemap
