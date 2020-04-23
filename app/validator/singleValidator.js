@@ -25,10 +25,6 @@ class categoryValidator extends validate{
             check('body')
                 .not().isEmpty()
                 .withMessage(' متن نباید خالی باشد!'),
-            check('color')
-                .isHexColor()
-                .withMessage('رنگ را درست انتخاب کنید!')
-                ,
             check('images')
                 .custom(async (value,{req})=>{
                     if(req.query._method === 'put') return;
