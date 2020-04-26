@@ -16,7 +16,7 @@ blockquote{
     font-family: 'Vazir' , Vazir , Tahoma , Arial ,sans-serif !important;
   color: #555555;
   padding:1.2em 30px 1.2em 75px;
-  border-left:8px solid #343A40 ;
+  border-left:8px solid #6a1b9a  ;
   line-height:1.6;
   position: relative;
   background:#EDEDED;
@@ -25,7 +25,7 @@ blockquote{
 blockquote::before{
     font-family: 'Vazir' , Vazir , Tahoma , Arial ,sans-serif !important;
   content: "\201C";
-  color:#343A40;
+  color:#6a1b9a ;
   font-size:4em;
   position: absolute;
   left: 10px;
