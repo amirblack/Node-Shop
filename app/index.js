@@ -57,7 +57,7 @@ module.exports = class Application {
         app.use(helmet.xssFilter())
         app.use(helmet.frameguard())
         app.use(limiter);
-        app.use(express.static(config.set.static.static_files));
+        app.use(express.static(config.set.static.static_files,{maxAge:2592000000,setHeaders: function(res, path) {res.setHeader("Expires", new Date(Date.now() + 2592000000*12).toUTCString());}}));
         app.set('view engine', config.set.static.view_engine);
         app.set('views', config.set.static.views);
         app.use(bodyParser.json());
