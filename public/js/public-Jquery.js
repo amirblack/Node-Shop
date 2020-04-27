@@ -1,8 +1,1 @@
-  $(document).ready(function () {
-      $('.sidenav').sidenav();
-      $('.parallax').parallax();
-      $('.modal').modal();
-      $('.materialboxed').materialbox();
-      $('.collapsible').collapsible();
-
-    });
+$(document).ready(function(){$(".sidenav").sidenav(),$(".parallax").parallax(),$(".modal").modal(),$(".materialboxed").materialbox(),$(".collapsible").collapsible(),$('.tabs').tabs(),$('.dropdown-trigger').dropdown(),$(".slider").slider({height:560,interval: 5000,duration: 1000,})});
