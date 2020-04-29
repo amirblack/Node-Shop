@@ -120,8 +120,9 @@ class singleController extends Controller {
             let objUpdate = {}
             if (req.file) {
                 objUpdate.images = req.file.location
-            }
+            } else {
             objUpdate.images = req.body.imagesThumb;
+            }
             let {
                 body,
                 slug,

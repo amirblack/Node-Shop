@@ -123,8 +123,10 @@
 </header>
       <!-- End-of-Navbar-fixed -->
 
-      <div class="main">
-        <h1 class="hide"><%= config.keysentence %></h1>
+      <div class="main"><% if(req.originalUrl === '/'){ %> 
+        <h1 class="hide"><%= config.keysentence %></h1> <% } else { %>
+        <h1 class="hide"><%= title %></h1>
+        <% } %>
         <%- body %>
       </div>
 

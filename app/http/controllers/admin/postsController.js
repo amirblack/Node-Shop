@@ -168,9 +168,12 @@ class postsController extends Controller {
 
             let objUpdate = {};
             if (req.file) {
+                console.log(req.file.location)
                 objUpdate.images = req.file.location;
-            }
+            } else {
             objUpdate.images = req.body.imagesThumb
+
+            }
             delete req.body.images;
             objUpdate.slug = this.slug(req.body.slug)
             let space = " "

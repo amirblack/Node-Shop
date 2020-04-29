@@ -11,5 +11,5 @@ module.exports ={
     websiteurl:process.env.WEBSITEURL,
     description:process.env.DESCRIPTION,
     keysentence:process.env.KEYSENTENCE,
-    debug:false,
+    debug:true,
 }
