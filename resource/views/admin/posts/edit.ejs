@@ -10,8 +10,9 @@
   <div class="col s12">
         <%- include(viewPath('layout/error')) %>
         </div>
-
+            <div class="card-panel blue"><p class="white-text">تاریخ ارسال نمایش داده شده یک روز جلوتر می باشد.</p></div>
             <form action="/admin/posts/edit/<%= posts.id %>?_method=put" method="post" enctype="multipart/form-data">      
+                
                 <div class="col s12">
                     <h5>تیتر</h5>
                     <input type="text" name="title" placeholder="تیتر را وارد کنید" value="<%=  posts.title %>">
