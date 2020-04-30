@@ -3,7 +3,7 @@ const middleWare = require('./middleware')
 
 class RememberLogin extends middleWare {
     handle(req, res, next) {
-        if (!req.isAuthenticated()) {
+        if (! req.isAuthenticated()) {
             const rememberToken = req.signedCookies.remember_token;
             if (rememberToken) return this.rememberMe(rememberToken, req, next)
         }

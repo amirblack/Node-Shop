@@ -16,7 +16,6 @@
     <div class="col s12">
             <% if(tags.docs.length > 0 ){ %>
             <% tags.docs.forEach(tag=>{ %>
-            <% if(dateEng(tag.timepost).format() <= dateEng().format()){ %>
     <div class="col s12 l6 xl6 m6">
           <div class="card medium">
           <div class="card-image">
@@ -36,8 +35,6 @@
         </div>
        
           </div>
-        
-        <% } %>
         <% }) %>
         </div>
          <div class="center">

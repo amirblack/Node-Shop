@@ -4,7 +4,6 @@
 <div class="slider">
   <ul class="slides">
     <% postslider.forEach(slider=>{ %>
-    <% if(dateEng(slider.timepost).format() <= dateEng().format()){ %>
     <li>
       <img src="<%= slider.images %>" width="720px" alt="<%= slider.title %>">
       <div class="caption center-align captionStyle">
@@ -14,7 +13,6 @@
         </a>
       </div>
     </li>
-    <% } %>
     <% }) %>
   </ul>
 </div>
@@ -36,7 +34,6 @@
   <div class="row">
     <div class="container">
       <% lastPosts.forEach(posts=>{ %>
-      <% if(dateEng(posts.timepost).format() <= dateEng().format()){ %>
       <div class="col s12 l4 m6">
         <div class="card medium">
           <div class="card-image">
@@ -56,7 +53,6 @@
         </div>
       </div>
 
-      <% } %>
       <%  }) %>
     </div>
   </div>
@@ -82,7 +78,6 @@
   <div class="row">
     <div class="container">
       <%  cate.post.forEach(posts=>{ %>
-      <% if(dateEng(posts.timepost).format() <= dateEng().format()){ %>
       <div class="col s12 l4 m6">
         <div class="card medium">
           <div class="card-image">
@@ -102,7 +97,7 @@
         </div>
 
       </div>
-      <% } %> <% }) %>
+<% }) %>
     </div>
   </div>
 </div>
@@ -114,7 +109,6 @@
   <h5>پربازدیدترین ها</h5>
   <div class="masonry">
     <% hotposts.forEach(post=>{ %>
-    <% if(dateEng(post.timepost).format() <= dateEng().format()){ %>
     <div class="masonry-item responsive">
       <img src="<%= post.images %>" width="720px" height="420px" alt="<%= post.title %>" class="masonry-content blur">
       <a class="centered" href="<%= post.path() %>">
@@ -124,7 +118,6 @@
         </h2>
       </a>
     </div>
-    <% } %>
     <% }) %>
   </div>
 </div>
@@ -134,7 +127,6 @@
   <h5>پربحث ترین ها</h5>
   <div class="masonry">
     <% mostComment.forEach(post=>{ %>
-    <% if(dateEng(post.timepost).format() <= dateEng().format()){ %>
     <div class="masonry-item responsive">
       <img src="<%= post.images %>" width="720px" height="420px" alt="<%= post.title %>" class="masonry-content blur">
       <a class="centered" href="<%= post.path() %>">
@@ -143,7 +135,6 @@
         </h2>
       </a>
     </div>
-    <% } %>
     <% }) %>
   </div>
 </div>

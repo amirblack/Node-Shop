@@ -126,7 +126,6 @@
                 <ul class="collection with-header">
                     <% if(randomPost.length > 0 ){ %>
                     <% randomPost.forEach(post=>{ %>
-                    <% if(dateEng(post.timepost).format() <= dateEng().toDate().toISOString()){ %>
                     <li class="collection-item avatar" id="myrandom">
                         <a href="<%= post.path() %>" rel="follow">
                             <img src="<%= post.images %>" alt="<%= post.title %>" class="circle">
@@ -136,7 +135,6 @@
                         <p class="author-color margin-5"><%= date(post.timepost).fromNow() %></p>
                     </li>
 
-                    <% } %>
                     <% }) %>
                     <% } else { %>
                     <li class="collection-item center hide-on-large-only">
@@ -158,13 +156,12 @@
                 </li>
                 <% if(lastposts.length > 0 ){ %>
                 <% lastposts.forEach(last=>{ %>
-                <% if(dateEng(last.timepost).format() <= dateEng().toDate().toISOString()){ %>
                 <li class="collection-item">
                     <span class="title"><a href="<%= last.path() %>" rel="follow" class="black-text"><%= last.title %>
                         </a></span>
                     <p class="author-color"><%= date(last.timepost).fromNow() %></p>
                 </li>
-                <% } }) } else{ %>
+                <%  }) } else{ %>
                 <li class="collection-item center">
                     <p>موردی یافت نشد.</p>
                 </li>
@@ -177,7 +174,6 @@
                 </li>
                 <% if(randomPost.length > 0 ){ %>
                 <% randomPost.forEach(random=>{ %>
-                <% if(dateEng(random.timepost).format() <= dateEng().toDate().toISOString()){ %>
                 <li class="collection-item avatar">
                     <a href="<%= random.path() %>" rel="follow">
                         <img src="<%= random.images %>" alt="<%= random.title %>" class="circle">
@@ -186,7 +182,6 @@
                             class="black-text"><%= random.title %></a></span>
                     <p class="author-color margin-5"><%= date(random.timepost).fromNow() %></p>
                 </li>
-                <%  }  %>
                 <% }) } else{ %>
                 <li class="collection-item center">
                     <p>موردی یافت نشد.</p>

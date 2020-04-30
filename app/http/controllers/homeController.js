@@ -1,5 +1,6 @@
 const Controller = require('app/http/controllers/controller');
 const Post = require('app/models/Post');
+const Single = require('app/models/Single')
 const Category = require('app/models/Category');
 const sm = require('sitemap')
 class homeController extends Controller {
@@ -7,7 +8,7 @@ class homeController extends Controller {
 
         let postslider = await Post.find({
                 type: true,
-
+                timepost:{$lte:Date.now()}
             }, 'title , slug , timepost , updatedAt , images').sort({
                 createdAt: -1
             }).limit(4),
@@ -22,7 +23,8 @@ class homeController extends Controller {
                     },
                 },
                 match: {
-                    type: true
+                    type: true,
+                    timepost:{$lte:Date.now()}
                 },
             }])
             .sort({
@@ -31,18 +33,21 @@ class homeController extends Controller {
 
             hotposts = await Post.find({
                 type: true,
+                timepost:{$lte:Date.now()},
             })
             .sort({
                 viewCount: -1,
             }).limit(6),
             mostComment = await Post.find({
                 type: true,
+                timepost:{$lte:Date.now()},
             })
             .sort({
                 commentCount: -1,
             }).limit(6),
             lastPosts = await Post.find({
                 type: true,
+                timepost:{$lte:Date.now()},
             }).sort({
                 createdAt: -1,
             }).limit(6);
@@ -58,7 +63,8 @@ class homeController extends Controller {
     async posts(req, res) {
         let page = req.query.page || 1;
         let posts = await Post.paginate({
-            type: true
+            type: true,
+            timepost:{$lte:Date.now()},
         }, {
             page,
             limit: 10,
@@ -80,6 +86,7 @@ class homeController extends Controller {
         let tags = await Post.paginate({
             tags: req.params.tag,
             type: true,
+            timepost:{$lte:Date.now()},
         }, {
             page,
             limit: 10,
@@ -112,7 +119,8 @@ class homeController extends Controller {
         }, 'name images slug description')
         let category = await Post.paginate({
             categories: categoryfinder.id,
-            type: true
+            type: true,
+            timepost:{$lte:Date.now()},
         }, {
             page,
             limit: 10,
@@ -142,6 +150,7 @@ class homeController extends Controller {
         let posts = Post.find({
             ...query,
             type: true,
+            timepost:{$lte:Date.now()},
         }, 'title images body slug timepost')
 
         posts = await posts.exec()
@@ -164,26 +173,17 @@ class homeController extends Controller {
                 priority: 1
             });
             mysitemap.add({
-                url: '/post',
+                url: '/posts',
                 changefreq: 'hourly',
                 priority: 1
             });
             mysitemap.add({
                 url: '/categories',
-                changefreq: 'daily',
-                priority: 0.7
-            });
-            mysitemap.add({
-                url: '/tags',
-                changefreq: 'yearly',
+                changefreq: 'monthly',
                 priority: 0.5
             });
-            mysitemap.add({
-                url: '/page',
-                changefreq: 'yearly',
-                priority: 0.3
-            });
-            let posts = await Post.find({}).sort({
+            
+            let posts = await Post.find({timepost:{$lte:Date.now()}}).sort({
                 createdAt: -1
             }).exec();
             posts.forEach(post => {
@@ -192,6 +192,14 @@ class homeController extends Controller {
                     changefreq: 'hourly',
                     priority: 1
                 })
+            });
+            let single = await Single.find({},"slug")
+            single.forEach(sing=>{
+            mysitemap.add({
+                url: `/page/${sing.slug}`,
+                changefreq: 'yearly',
+                priority: 0.3
+            });
             })
             let categories = await Category.find({}).sort({
                 createdAt: -1

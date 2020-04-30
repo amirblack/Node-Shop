@@ -62,7 +62,7 @@ userschema.methods.setRememberToken = function (res) {
     httpOnly: true,
     signed: true
   });
-  this.update({
+  this.updateOne({
       rememberToken: token
     },
     err => {

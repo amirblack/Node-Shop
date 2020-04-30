@@ -188,7 +188,6 @@ class postsController extends Controller {
                 timepicker,
                 lang,
             } = req.body;
-            let now = new Date()
             let timepost = new Date(datepicker + space.concat(timepicker)).toUTCString()
 
             await Post.findByIdAndUpdate(req.params.id, {

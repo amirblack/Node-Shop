@@ -6,7 +6,9 @@ class postController extends Controller {
 
     async index(req, res) {
         let posts = await Post.findOneAndUpdate({
-                slug: req.params.post
+                slug: req.params.post,
+                type:true,
+                timepost:{$lte:Date.now()},
             }, {
                 $inc: {
                     viewCount: 1
@@ -50,11 +52,15 @@ class postController extends Controller {
                 }
 
             ])
-
+        if(! posts) return res.redirect('/')
         let randomPost = await Post.find({
             categories: posts.categories.id,
             title: {
                 $ne: posts.title
+            },
+            type:true,
+            timepost:{
+                $lte:Date.now()
             }
         }).limit(5).sort({
             createdAt: -1
@@ -64,6 +70,10 @@ class postController extends Controller {
         let lastposts = await Post.find({
             title: {
                 $ne: posts.title
+            },
+            type:true,
+            timepost:{
+                $lte:Date.now()
             }
         }, 'title slug timepost createdAt').limit(5).sort({
             createdAt: -1

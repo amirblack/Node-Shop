@@ -47,10 +47,9 @@ router.get('/page/advertise',singleController.ads)
 router.get('/page/faq',singleController.faq)
 router.get('/page/copyright',singleController.copyright)
 router.get('/page/aboutus',singleController.aboutus)
-
+router.get('/tags',(req,res)=> res.redirect('/'))
 //sitemap
 router.get('/sitemap.xml',homeController.sitemap)
-
 
 
 //Handle error!
