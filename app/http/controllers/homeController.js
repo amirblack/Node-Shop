@@ -57,6 +57,7 @@ class homeController extends Controller {
             hotposts,
             mostComment,
             lastPosts,
+            title:'لیجیاتو-یادگیری در هر لحظه زندگی',
             description: config.description,
         })
     }

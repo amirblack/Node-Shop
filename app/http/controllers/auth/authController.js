@@ -9,7 +9,7 @@ class registerController extends Controller {
         let categories = await Category.find({})
         res.render('auth/signup', {
             categories,
-            title: 'ایجاد حساب',
+            title: 'ایجاد حساب کاربری-لیجیاتو',
             recap: this.recaptcha.render()
         })
     }
@@ -17,7 +17,7 @@ class registerController extends Controller {
         let categories = await Category.find({})
         res.render('auth/login', {
             categories,
-            title: 'ورود',
+            title: 'ورود به حساب کاربری-لیجیاتو',
             recap: this.recaptcha.render(),
         })
     }

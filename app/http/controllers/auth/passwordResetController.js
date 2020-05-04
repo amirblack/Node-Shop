@@ -10,7 +10,7 @@ class passwordResetController extends controller {
 		let categories = await Category.find({})
 		res.render('auth/resetpassword', {
 			categories,
-			title: 'فراموشی رمز عبور',
+			title: 'فراموشی رمز عبور حساب کاربری -لیجیاتو',
 			recap: this.recaptcha.render(),
 		})
 	}

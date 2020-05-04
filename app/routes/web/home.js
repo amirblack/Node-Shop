@@ -34,6 +34,15 @@ router.get('/exit', (req, res) => {
     res.redirect('/')
 })
 //sites-router
+router.get('/login',(req,res)=>{
+    res.redirect('/')
+})
+router.get('/signup',(req,res)=>{
+    res.redirect('/')
+})
+router.get('/forget',(req,res)=>{
+    res.redirect('/')
+})
 router.get('/posts',homeController.posts);
 router.get('/posts/:post',csrfProtection,postController.index);
 router.post('/posts/comment',limiter,csrfProtection,commentValidator.handle() , postController.comment);

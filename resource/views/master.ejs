@@ -23,8 +23,9 @@
   <meta property="og:locale" content="fa_IR" /><% if(req.url == '/'){  %>
   <meta property="og:type" content="website" /><% } else if(req.url=='/panel'){   %>
   <meta property="og:type" content="panel" /><% } else {  %>
-  <meta property="og:type" content="article" /><% } %>
-  <meta property="og:title" content="<%= defineContent('title') %>" />
+  <meta property="og:type" content="article" /><% } %><% if(req.url="/categories"){  %>
+  <meta property="og:title" content="<%- `دسته بندی ` + defineContent('title') || brandname %>" /><% } else{ %>
+  <meta property="og:title" content="<%- defineContent('title') || brandname %>" /><% } %>
   <meta property="og:url" content="<%= config.websiteurl+req.url %>" />
   <meta property="og:site_name" content="<%= brandname %>" />
   <meta property="og:description" content="<%= description %>" /> <%- defineContent('meta') %>

@@ -8,7 +8,7 @@ class recoveryPassController extends controller {
         let categories = await Category.find({})
         return res.render('auth/recoverypassword', {
             categories,
-            title: 'بازگردانی رمز عبور',
+            title: 'بازگردانی رمز عبور حساب کاربری -لیجیاتو',
             recap: this.recaptcha.render(),
             token: req.params.token,
         })
