@@ -31,6 +31,7 @@
    <meta property="og:description" content="پنل کاربری <%= brandname %>" />
    <title><%= defineContent('title') || brandname %></title>
    <%- style %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.min.js"></script>
  </head>
  </head>
 
@@ -129,8 +130,9 @@
    </footer>
 
    <script src="/js/jquery-3.4.1.min.js"></script>
-   <script src="/js/public-Jquery.js"></script>
-   <script src="/js/materialize.min.js"></script>
+   <script>
+     head.js("/js/public-Jquery.js","/js/materialize.min.js")
+   </script>
 
    <%- include(viewPath('layout/sweetAlert')) %>
    <%- script %>

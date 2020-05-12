@@ -30,13 +30,18 @@
   <meta property="og:site_name" content="<%= brandname %>" />
   <meta property="og:description" content="<%= description %>" /> <%- defineContent('meta') %>
   <%- style %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.min.js"></script>
 </head>
 
 <body dir="rtl">
   <%- include(viewPath('home/fa-home')) %>
   <script src="/js/jquery-3.4.1.min.js"></script>
-  <script src="/js/materialize.min.js"></script>
-  <script src="/js/public-Jquery.js"></script>
+  <script>
+    head.js(
+      "/js/materialize.min.js",
+      "/js/public-Jquery.js",
+    );
+  </script>
   <%- script %>
 </body>
 </html>

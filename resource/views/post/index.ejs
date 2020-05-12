@@ -192,7 +192,9 @@
         </div>
     </div>
 </div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
+<script>
+    head.js("https://static.addtoany.com/menu/page.js")
+</script>
 <%- include(viewPath('layout/sweetAlert')) %>
 <%- contentFor('meta') %>
 <meta property="og:image" content="<%= posts.images %>" />

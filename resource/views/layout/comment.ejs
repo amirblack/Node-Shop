@@ -94,7 +94,7 @@
 
             <script>
               $(document).ready(function () {
-                $('.modal').modal()
+                $('.modal').modal(),
                 $(document).on('click', '.modal-answer', function (event) {
                   let parentId = ($(this).data("parent"))
                   $("#modal1").find("[id='parentMe']").val(parentId)
