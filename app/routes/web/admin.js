@@ -29,6 +29,10 @@ const csrfProtection = csrf({ cookie: true });
 const csrfHandler = require('app/http/middlewares/csrfHandler')
 router.use(redirectifadmin.handle)
 //Previews
+router.use((req,res,next)=>{
+    res.locals.layout = "admin/previews"
+    next()
+})
 router.get('/posts/previews/:id',csrfProtection,adminController.previews)
 router.use(csrfHandler.handler)
 //End-Previews
