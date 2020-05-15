@@ -77,6 +77,8 @@
   .masonry-content {
     border-radius: 4px;
     overflow: hidden;
+    max-width: 720px;
+    height: auto;
   }
 
   .masonry-item {

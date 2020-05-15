@@ -5,7 +5,7 @@
   <ul class="slides">
     <% postslider.forEach(slider=>{ %>
     <li>
-      <img src="<%= slider.images %>" width="720px" alt="<%= slider.title %>">
+      <img src="<%= slider.images %>" alt="<%= slider.title %>">
       <div class="caption center-align captionStyle">
         <h2 class="caption-size"><%= slider.title %>
         </h2>
@@ -110,7 +110,7 @@
   <div class="masonry">
     <% hotposts.forEach(post=>{ %>
     <div class="masonry-item responsive">
-      <img src="<%= post.images %>" width="720px" height="420px" alt="<%= post.title %>" class="masonry-content blur">
+      <img src="<%= post.images %>"  alt="<%= post.title %>" class="masonry-content blur">
       <a class="centered" href="<%= post.path() %>">
         <h2><span class="text-shadow card-content-h2">
             <%= post.title %>
@@ -128,7 +128,7 @@
   <div class="masonry">
     <% mostComment.forEach(post=>{ %>
     <div class="masonry-item responsive">
-      <img src="<%= post.images %>" width="720px" height="420px" alt="<%= post.title %>" class="masonry-content blur">
+      <img src="<%= post.images %>"  alt="<%= post.title %>" class="masonry-content blur">
       <a class="centered" href="<%= post.path() %>">
         <h2 class="text-shadow card-content-h2">
           <%= post.title %>
