@@ -80,7 +80,7 @@ class postController extends Controller {
         })
         return res.render('post/index', {
             posts,
-            description: description[0].substring(3),
+            description: description[0].substring(3)+"."+description[1].substring(3),
             previews: false,
             randomPost,
             title: posts.title + ' - لیجیاتو',
